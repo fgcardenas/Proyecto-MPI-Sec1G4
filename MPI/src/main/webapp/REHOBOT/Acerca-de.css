@@ -1,0 +1,40 @@
+ .u-section-1 {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(to bottom, #f1c50e, #ff680a);
+  background-size: cover;
+}
+
+.u-section-1 .u-sheet-1 {
+  min-height: 492px;
+}
+
+.u-section-1 .u-image-1 {
+  width: 438px;
+  height: 267px;
+  margin: 174px auto 51px 21px;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-image-1 {
+    inset: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 487px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 374px;
+  }
+
+  .u-section-1 .u-image-1 {
+    width: 340px;
+    height: 207px;
+    margin-left: 0;
+  }
+}
