@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -120,14 +122,14 @@
     <header>
         <h1>REHOBOT</h1>
     </header>
-
+  
     <!-- Contenido principal -->
     <main>
         <h2>Insumos de Panadería de Calidad</h2>
         <p>Elige cómo deseas continuar:</p>
         <div class="button-container">
-            <button onclick="location.href='inicioInventario.html'">Administrador</button>
-            <button onclick="location.href='inicioVenta.html'">Cliente</button>
+            <button onclick="location.href='inicioInventario.jsp'">Administrador</button>
+            <button onclick="location.href='inicioVenta.jsp'">Cliente</button>
         </div>
     </main>
 
