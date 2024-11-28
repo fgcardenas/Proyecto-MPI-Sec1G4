@@ -1,7 +1,3 @@
-<!-- 
-* Copyright 2018 Carlos Eduardo Alfaro Orellana
-  https://www.youtube.com/c/CarlosAlfaro007
--->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,18 +23,18 @@
 			<p class="text-center" style="font-size: 80px;">
 				<i class="zmdi zmdi-account-circle"></i>
 			</p>
-			<p class="text-center text-condensedLight">Inicie SesiÃ³n con cuenta Admin REHOBOT</p>
-			<form action="home.html">
+			<p class="text-center text-condensedLight">Inicie Sesión con cuenta Admin REHOBOT</p>
+			<form action="home.jsp">
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 				    <input class="mdl-textfield__input" type="text" id="userName">
 				    <label class="mdl-textfield__label" for="userName">Usuario</label>
 				</div>
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 				    <input class="mdl-textfield__input" type="password" id="pass">
-				    <label class="mdl-textfield__label" for="pass">ContraseÃ±a</label>
+				    <label class="mdl-textfield__label" for="pass">Contraseña</label>
 				</div>
-				<button class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; margin: 0 auto; display: block;">
-					Iniciar SesiÃ³n
+				<button class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #f77f07; margin: 0 auto; display: block;">
+					Iniciar Sesión
 				</button>
 			</form>
 		</div>
