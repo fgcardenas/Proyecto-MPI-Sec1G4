@@ -1,3 +1,14 @@
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page import="jakarta.servlet.http.HttpServletRequest" %>
+
+<%
+    HttpSession sesion = request.getSession(false); // Obtiene la sesión si existe
+    String userName = (sesion != null) ? (String) sesion.getAttribute("userName") : null;
+
+    if (userName == null) {
+        response.sendRedirect("login.jsp"); // Redirige al login si no hay sesión
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -93,16 +104,16 @@
 				<i class="zmdi zmdi-close btn-menu"></i> Inventario
 			</div>
 			<figure class="full-width navLateral-body-tittle-menu">
-				<div>
-					<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
-				</div>
-				<figcaption>
-					<span>
-						Nombre Administrador <br>
-						<small>Admin</small>
-					</span>
-				</figcaption>
-			</figure>
+                            <div>
+                                <img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+                            </div>
+                            <figcaption>
+                                <span>
+                                    <%= userName %> <br>
+                                    <small>Administrador</small>
+                                </span>
+                            </figcaption>
+                        </figure>
 			<nav class="full-width">
 				<ul class="full-width list-unstyle menu-principal">
 					<li class="full-width">
