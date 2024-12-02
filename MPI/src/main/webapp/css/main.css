@@ -1,7 +1,3 @@
-/*
-* Copyright 2018 Carlos Eduardo Alfaro Orellana
-  https://www.youtube.com/c/CarlosAlfaro007
-*/
 
 /*=====================================================
 					Tipografia
@@ -276,7 +272,7 @@ html, body{
 	align-items: center;
 	justify-content: center;
 	color: var(--color-text);
-	background-image: url(../assets/img/fontLogin.jpg);
+	background-image: url(../img/Sala_de_Ventas.jpg);
 }
 .container-login{
 	width: 100%;

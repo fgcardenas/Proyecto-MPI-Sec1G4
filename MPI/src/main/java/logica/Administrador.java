@@ -1,35 +1,43 @@
-
 package logica;
 
-public class Administrador {
-    private String dni;
-    private String name;
-    private String lastName;
-    private String phone;
-    private String email;
-    private String address;
-    private String userName;
-    private String password;
+import java.io.Serializable;
+import jakarta.persistence.Entity;
 
-    public Administrador(String dni, String name, String lastName, String phone, String email, String address, String userName, String password) {
-        this.dni = dni;
-        this.name = name;
-        this.lastName = lastName;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.userName = userName;
-        this.password = password;
+@Entity
+public class Administrador extends Persona implements Serializable {
+   private String direccion_Tienda;
+   private String Contrasenia_Admin;
+   private String username;
+   
+
+   public Administrador() {
+   }
+
+    public Administrador(String direccion_Tienda,String username, String Contrasenia_Admin, String nombre_Persona, String telefono, String mail, String rut_Persona) {
+        super(nombre_Persona, telefono, mail, rut_Persona);  // Aquí el id se genera en la clase padre
+        this.direccion_Tienda = direccion_Tienda;
+        this.username = username;
+        this.Contrasenia_Admin = Contrasenia_Admin;
     }
 
-    // Getters y Setters
-    public String getDni() { return dni; }
-    public String getNombre() { return name; }
-    public String getApellido() { return lastName; }
-    public String getTelefono() { return phone; }
-    public String getEmail() { return email; }
-    public String getAddress() { return address; }
-    public String getUserName() { return userName; }
-    public String getPassword() { return password; }
-}
 
+   public String getUsername(){
+       return username;
+   }
+   public String getDireccion_Tienda() {
+      return this.direccion_Tienda;
+   }
+
+   public void setDireccion_Tienda(String direccion_Tienda) {
+      this.direccion_Tienda = direccion_Tienda;
+   }
+
+    public String getPasswordAdmin() {
+        return Contrasenia_Admin;
+    }
+
+    public void setContrasenia_Admin(String Contrasenia_Admin) {
+        this.Contrasenia_Admin = Contrasenia_Admin;
+    }
+   
+}

@@ -8,14 +8,29 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import logica.Administrador;
+import logica.Controladora;
+import java.util.List;
+import jakarta.servlet.http.HttpSession;
 
 
 @WebServlet("/AdminServlet")
 public class AdminServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+    Controladora control = new Controladora();
     
-    // Lista estática para almacenar los administradores (en memoria)
-    public static ArrayList<Administrador> admins = new ArrayList<>();
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+     
+    }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        List<Administrador> listAdmin = control.traerAdministrador();
+        
+        HttpSession mySession= request.getSession();
+        mySession.setAttribute("listaAdministrador", listAdmin);
+        response.sendRedirect("inicioInventario.jsp");
+        
+    }
+    
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,15 +43,11 @@ public class AdminServlet extends HttpServlet {
         String address = request.getParameter("addressAdmin");
         String userName = request.getParameter("UserNameAdmin");
         String password = request.getParameter("passwordAdmin");
-
-        // Crear el nuevo administrador
-        Administrador admin = new Administrador(dni, name, lastName, phone, email, address, userName, password);
         
-        // Almacenar el administrador en la lista (en memoria)
-        admins.add(admin);
+        String nombreAdmin = name+" "+lastName;
 
-        // Redirigir a la lista de administradores
-        request.setAttribute("admins", admins);
+        control.crearAdmin(nombreAdmin, password, phone, email, dni, address,userName);
+        
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
 }

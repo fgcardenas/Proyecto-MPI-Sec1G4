@@ -1,16 +1,20 @@
 package Servlets;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
-import jakarta.servlet.ServletException;
+import logica.Articulo;
+import logica.Controladora;
 
-@WebServlet("/LogoutServlet")
-public class LogOutServlet extends HttpServlet {
+@WebServlet(name = "SvEliminarProd", urlPatterns = {"/SvEliminarProd"})
+public class SvEliminarProd extends HttpServlet {
+
+    Controladora control=new Controladora();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -20,16 +24,22 @@ public class LogOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false); // Obtener la sesión sin crear una nueva
-        if (session != null) {
-            session.invalidate(); // Invalidar la sesión
-        }
-        response.sendRedirect("login.jsp"); // Redirigir a la página de inicio de sesión
+        processRequest(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        int id=Integer.parseInt(request.getParameter("id"));
+        String usuario = request.getParameter("idUsuario");
+        System.out.println("ID a eliminar: "+ id);
+        System.out.println("ID a eliminar: "+ usuario);
+        int idCliente=control.obtenerCliente(usuario);
+        
+        control.eliminarProducto(id,idCliente);
+        System.out.println("Se eliminara el articul: " +id );
+        response.sendRedirect("indexClien.jsp");
     }
 
     @Override
@@ -38,4 +48,3 @@ public class LogOutServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-
