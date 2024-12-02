@@ -1,37 +1,49 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-                             http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd"
-         version="4.0">
-  
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                              http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd">
     <!-- Configuración del LoginServlet -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.mpi.servlet.LoginServlet</servlet-class>
+        <servlet-class>Servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-  
     <!-- Configuración del LogOutServlet -->
     <servlet>
         <servlet-name>LogOutServlet</servlet-name>
-        <servlet-class>com.mpi.servlet.LogOutServlet</servlet-class>
+        <servlet-class>Servlets.LogOutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogOutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
-  
     <!-- Configuración del AdminServlet -->
     <servlet>
         <servlet-name>AdminServlet</servlet-name>
-        <servlet-class>com.mpi.servlet.AdminServlet</servlet-class>
+        <servlet-class>Servlets.AdminServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminServlet</servlet-name>
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
-
+    
+    <servlet>
+        <servlet-name>SvArticulo</servlet-name>
+        <servlet-class>Servlets.SvArticulo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SvArticulo</servlet-name>
+        <url-pattern>/svarticulo</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SvCliente</servlet-name>
+        <servlet-class>Servlets.SvCliente</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SvCliente</servlet-name>
+        <url-pattern>/svcliente</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
