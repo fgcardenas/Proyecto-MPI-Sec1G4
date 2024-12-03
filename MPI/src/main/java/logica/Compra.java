@@ -25,14 +25,16 @@ public class Compra {
    @ElementCollection
    private List<Integer> lista_Articulos;  // Cambiado a List<Integer>
    private String direccionEnvio;
+   private Empleado vendedor;
 
    public Compra() {
    }
 
-   public Compra( int cliente, List<Integer> lista_Articulos, String direccionEnvio) {
+   public Compra( int cliente, List<Integer> lista_Articulos, String direccionEnvio, Empleado vendedor) {
       this.cliente = cliente;
       this.lista_Articulos = lista_Articulos;
       this.direccionEnvio = direccionEnvio;
+      this.vendedor = vendedor;
    }
 
    public int getId_Compra() {
@@ -65,5 +67,9 @@ public class Compra {
 
    public void setDireccionEnvio(String direccionEnvio) {
       this.direccionEnvio = direccionEnvio;
+   }
+   
+   public String getVendedor(){
+       return vendedor.getNombre_Persona();
    }
 }

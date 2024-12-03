@@ -44,11 +44,10 @@ public class Controladora {
         
         boolean ingreso=false;
         
-        List<Administrador> listaAdmin=new ArrayList<Administrador>();
-        listaAdmin=controlPersis.traerAdministrador();
+        List<Administrador> listaAdmin=controlPersis.traerAdministrador();
         
         for(Administrador admin:listaAdmin){
-            if(admin.getMail().equals(usuario)){
+            if(admin.getUsername().equals(usuario)){
                 if(admin.getPasswordAdmin().equals(contrasenia)){
                     ingreso=true;
                 }else{
@@ -155,7 +154,6 @@ public class Controladora {
         
         // Obtener lista de compras
         List<Compra> listaCompra = controlPersis.traerCompras();
-        boolean compraEncontrada = false;
 
         // Buscar la compra correspondiente al cliente
         for (Compra compra : listaCompra) {

@@ -20,7 +20,7 @@ public class CompraJpaController implements Serializable {
     }
 
     public CompraJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("REHOBOT");
+        this.emf = Persistence.createEntityManagerFactory("rehobotdb");
     }
 
     public EntityManager getEntityManager() {

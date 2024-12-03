@@ -47,8 +47,9 @@ public class SvEditarAdmin extends HttpServlet {
         String rut_Persona=request.getParameter("rut_Persona");
         String direccion_Tienda=request.getParameter("direccion_Tienda");
         String Contrasenia_Admin=request.getParameter("Contrasenia_Admin");
+        String usernameAdmin = request.getParameter("usernameAdmin");
         
-        Administrador admin= (Administrador) request.getSession().getAttribute("AdminEditar");
+        Administrador admin = (Administrador) request.getSession().getAttribute("AdminEditar");
         
         admin.setNombre_Persona(nombre_Persona);
         admin.setTelefono(telefono);
@@ -56,6 +57,7 @@ public class SvEditarAdmin extends HttpServlet {
         admin.setRut_Persona(rut_Persona);
         admin.setDireccion_Tienda(direccion_Tienda);
         admin.setContrasenia_Admin(Contrasenia_Admin);
+        admin.setUsername(usernameAdmin);
         
         control.editarAdmin(admin);
         

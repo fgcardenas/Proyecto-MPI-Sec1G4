@@ -2,8 +2,10 @@ package logica;
 
 import java.io.Serializable;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
+@Table (name="administradores")
 public class Administrador extends Persona implements Serializable {
    private String direccion_Tienda;
    private String Contrasenia_Admin;
@@ -38,6 +40,10 @@ public class Administrador extends Persona implements Serializable {
 
     public void setContrasenia_Admin(String Contrasenia_Admin) {
         this.Contrasenia_Admin = Contrasenia_Admin;
+    }
+    
+    public void setUsername(String user){
+        this.username = user;
     }
    
 }

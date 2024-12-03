@@ -29,6 +29,16 @@
     </servlet-mapping>
     
     <servlet>
+    <servlet-name>ListAdminServlet</servlet-name>
+    <servlet-class>Servlets.ListAdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListAdminServlet</servlet-name>
+        <url-pattern>/listarAdmins</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
         <servlet-name>SvArticulo</servlet-name>
         <servlet-class>Servlets.SvArticulo</servlet-class>
     </servlet>

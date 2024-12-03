@@ -35,15 +35,15 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Recibir datos del formulario
-        String dni = request.getParameter("DNIAdmin");
-        String name = request.getParameter("NameAdmin");
-        String lastName = request.getParameter("LastNameAdmin");
-        String phone = request.getParameter("phoneAdmin");
-        String email = request.getParameter("emailAdmin");
-        String address = request.getParameter("addressAdmin");
-        String userName = request.getParameter("UserNameAdmin");
-        String password = request.getParameter("passwordAdmin");
-        
+        String dni = request.getParameter("dni");
+        String name = request.getParameter("name");
+        String lastName = request.getParameter("lastName");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+
         String nombreAdmin = name+" "+lastName;
 
         control.crearAdmin(nombreAdmin, password, phone, email, dni, address,userName);

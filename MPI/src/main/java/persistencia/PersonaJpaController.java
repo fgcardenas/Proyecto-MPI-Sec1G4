@@ -19,7 +19,7 @@ public class PersonaJpaController implements Serializable {
    }
 
    public PersonaJpaController() {
-      this.emf = Persistence.createEntityManagerFactory("REHOBOT");
+      this.emf = Persistence.createEntityManagerFactory("rehobotdb");
    }
 
    public EntityManager getEntityManager() {

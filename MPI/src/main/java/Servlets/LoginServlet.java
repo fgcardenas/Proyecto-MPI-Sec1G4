@@ -23,8 +23,7 @@ public class LoginServlet extends HttpServlet {
         String userName = request.getParameter("userName");
         String password = request.getParameter("pass");
         
-        boolean validation = false;
-        validation = control.comprobarIngreso(userName, password);
+        boolean validation = control.comprobarIngreso(userName, password);
 
         if(validation == true || validateMainAdmin(userName,password)){
             HttpSession mySession = request.getSession(true);

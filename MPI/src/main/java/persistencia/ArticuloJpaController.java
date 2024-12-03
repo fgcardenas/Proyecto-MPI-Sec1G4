@@ -20,7 +20,7 @@ public class ArticuloJpaController implements Serializable {
     }
 
     public ArticuloJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("REHOBOT");
+        this.emf = Persistence.createEntityManagerFactory("rehobotdb");
     }
 
     public EntityManager getEntityManager() {
