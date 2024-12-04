@@ -41,7 +41,7 @@
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde aut nulla accusantium minus corporis accusamus fuga harum natus molestias necessitatibus.
+					Agregue los detalles del producto
 				</p>
 			</div>
 		</section>
@@ -94,7 +94,7 @@
 										<div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="discountProduct">
-												<label class="mdl-textfield__label" for="discountProduct">% Discount</label>
+												<label class="mdl-textfield__label" for="discountProduct">%Discount</label>
 												<span class="mdl-textfield__error">Invalid discount</span>
 											</div>	
 										</div>

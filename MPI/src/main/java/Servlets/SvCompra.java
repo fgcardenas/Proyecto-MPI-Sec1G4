@@ -14,7 +14,7 @@ import logica.Articulo;
 import logica.Compra;
 import logica.Controladora;
 
-@WebServlet(name = "SvCompra", urlPatterns = {"/SvCompra"})
+@WebServlet("/SvCompra")
 public class SvCompra extends HttpServlet {
     
     Controladora control=new Controladora();

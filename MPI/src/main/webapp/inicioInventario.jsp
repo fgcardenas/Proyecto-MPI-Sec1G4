@@ -26,13 +26,14 @@
 			<p class="text-center text-condensedLight">Inicie Sesión con cuenta Admin REHOBOT</p>
                         <form action="LoginServlet" method="POST">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="userName" name="userName">
-                                <label class="mdl-textfield__label" for="userName">Usuario</label>
+                                <input class="mdl-textfield__input" type="mail" id="mail" name="mail">
+                                <label class="mdl-textfield__label" for="mail">Usuario</label>
                             </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="password" id="pass" name="pass">
-                                <label class="mdl-textfield__label" for="pass">Contraseña</label>
+                                <input class="mdl-textfield__input" type="contrasenia" id="contrasenia" name="contrasenia">
+                                <label class="mdl-textfield__label" for="contrasenia">Contraseña</label>
                             </div>
+                            <input type="hidden" name="origen" value="inicioInventario" />
                             <button class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #f77f07; margin: 0 auto; display: block;">
                                 Iniciar Sesión
                             </button>
