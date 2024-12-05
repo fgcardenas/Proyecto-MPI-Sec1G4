@@ -10,10 +10,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import logica.Articulo;
 import logica.Controladora;
 
-@WebServlet(name = "SvArticulo", urlPatterns = {"/SvArticulo"})
+@WebServlet("/SvArticulo")
 public class SvArticulo extends HttpServlet {
 
   Controladora control = new Controladora() ;
@@ -36,35 +38,31 @@ public class SvArticulo extends HttpServlet {
         
         mySession.setAttribute("listaArticulos",listaArticulos);
         
-        response.sendRedirect("tienda.jsp");
+        response.sendRedirect("products.jsp");
     }
     
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        String nombre_Articulo=request.getParameter("nombre_Articulo");
-        String categoria_Articulo=request.getParameter("categoria_Articulo");
-        String link_Imagen=request.getParameter("link_Imagen");
-        String marca_Articulo=request.getParameter("marca_Articulo");
-        
-        int precio_Articulo=Integer.parseInt(request.getParameter("precio_Articulo"));
-        int stock=Integer.parseInt(request.getParameter("stock"));
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Capturar los valores del formulario
+        String nombreArticulo = request.getParameter("nombre_Articulo");
+        String categoriaArticulo = request.getParameter("categoria_Articulo");
+        int precioArticulo = Integer.parseInt(request.getParameter("precio_Articulo"));
+        int stock = Integer.parseInt(request.getParameter("stock"));
+        String marcaArticulo = request.getParameter("marca_Articulo");
+        String linkImagen = request.getParameter("link_Imagen");
+        String fechaVencimientoStr = request.getParameter("fechaVencimiento");
 
-        
-        System.out.println("El nombre del articulo es: "+nombre_Articulo);
-        
-        control.crearArticulo(nombre_Articulo, categoria_Articulo, precio_Articulo, stock, link_Imagen, marca_Articulo);
-              
-        System.out.println("El nombre del articulo es: "+nombre_Articulo);
-        
-        response.sendRedirect("indexAdmin.jsp");
-    }
+        // Convertir fecha de vencimiento a LocalDate
+        LocalDate fechaVencimiento = null;
+        if (fechaVencimientoStr != null && !fechaVencimientoStr.isEmpty()) {
+            fechaVencimiento = LocalDate.parse(fechaVencimientoStr, DateTimeFormatter.ISO_DATE);
+        }
+          // Crear el artículo y persistir
+       
+        control.crearArticulo(nombreArticulo, categoriaArticulo, precioArticulo, stock, linkImagen, marcaArticulo, fechaVencimiento);
+
+        // Redirigir o devolver respuesta
+        response.sendRedirect("products.jsp"); // Página de éxito o mensaje
 
      
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+    }
 }

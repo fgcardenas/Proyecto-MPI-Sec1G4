@@ -14,6 +14,7 @@
     <class>logica.Compra</class>
     <class>logica.Empleado</class>
     <class>logica.Persona</class>
+    <class>logica.Categoria></class>
     
     <!-- Propiedades de la base de datos -->
     <properties>

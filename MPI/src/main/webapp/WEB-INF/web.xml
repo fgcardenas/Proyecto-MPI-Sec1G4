@@ -49,4 +49,20 @@
         <servlet-name>SvCliente</servlet-name>
         <url-pattern>/svcliente</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SvCategory</servlet-name>
+        <servlet-class>Servlets.SvCategory</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SvCategory</servlet-name>
+        <url-pattern>/svcategory</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SvMostrarProductos</servlet-name>
+        <servlet-class>Servlets.SvMostrarProductos</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SvMostrarProductos</servlet-name>
+        <url-pattern>/svmostrarproductos</url-pattern>
+    </servlet-mapping>
 </web-app>

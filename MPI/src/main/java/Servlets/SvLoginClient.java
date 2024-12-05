@@ -35,9 +35,9 @@ public class SvLoginClient extends HttpServlet {
         if (validation) {
             HttpSession mySession = request.getSession(true);
             mySession.setAttribute("mail", mail);
-            response.sendRedirect("inicioVenta.jsp");
+            response.sendRedirect("inicioVenta.html");
         } else {
-            response.sendRedirect("inicioVenra.jsp?error=1");  // Redirigir con error si la validación falla
+            response.sendRedirect("inicioVenta.html?error=1");  // Redirigir con error si la validación falla
         }
     }
 
