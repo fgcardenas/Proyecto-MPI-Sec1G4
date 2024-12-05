@@ -2,14 +2,13 @@
 <web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                              http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd">
     <!-- Configuración del LoginServlet -->
     <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>Servlets.LoginServlet</servlet-class>
+        <servlet-name>SvLoginAdmin</servlet-name>
+        <servlet-class>Servlets.SvLoginAdmin</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
+        <servlet-name>SvLoginAdmin</servlet-name>
+        <url-pattern>/svloginadmin</url-pattern>
     </servlet-mapping>
-    <!-- Configuración del LogOutServlet -->
     <servlet>
         <servlet-name>LogOutServlet</servlet-name>
         <servlet-class>Servlets.LogOutServlet</servlet-class>
@@ -18,7 +17,6 @@
         <servlet-name>LogOutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
-    <!-- Configuración del AdminServlet -->
     <servlet>
         <servlet-name>AdminServlet</servlet-name>
         <servlet-class>Servlets.AdminServlet</servlet-class>
@@ -27,17 +25,14 @@
         <servlet-name>AdminServlet</servlet-name>
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
-    
     <servlet>
-    <servlet-name>ListAdminServlet</servlet-name>
-    <servlet-class>Servlets.ListAdminServlet</servlet-class>
+        <servlet-name>ListAdminServlet</servlet-name>
+        <servlet-class>Servlets.ListAdminServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ListAdminServlet</servlet-name>
         <url-pattern>/listarAdmins</url-pattern>
     </servlet-mapping>
-
-
     <servlet>
         <servlet-name>SvArticulo</servlet-name>
         <servlet-class>Servlets.SvArticulo</servlet-class>
@@ -46,7 +41,6 @@
         <servlet-name>SvArticulo</servlet-name>
         <url-pattern>/svarticulo</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>SvCliente</servlet-name>
         <servlet-class>Servlets.SvCliente</servlet-class>
@@ -55,5 +49,4 @@
         <servlet-name>SvCliente</servlet-name>
         <url-pattern>/svcliente</url-pattern>
     </servlet-mapping>
-    
 </web-app>

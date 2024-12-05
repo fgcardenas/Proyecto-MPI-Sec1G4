@@ -146,10 +146,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="LoginServlet" method="POST">
+                <form action="SvLoginClient" method="POST">
                     <div class="mb-3">
                         <label for="loginEmail" class="form-label">Correo Electrónico</label>
-                        <input type="text" name="userName" class="form-control" id="loginEmail" required>
+                        <input type="text" name="mail" class="form-control" id="loginEmail" required>
                     </div>
                     <div class="mb-3">
                         <label for="loginPassword" class="form-label">Contraseña</label>
@@ -189,30 +189,30 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="SvCliente" method="POST" id="registerForm">
+                <form action="SvCliente" method="POST">
                     <div class="mb-3">
-                        <label for="registerName" class="form-label">Nombre y Apellido</label>
-                        <input type="text" name="nombre_Persona" class="form-control" id="registerName" required>
+                        <label for="nombre_Persona" class="form-label">Nombre y Apellido</label>
+                        <input type="text" name="nombre_Persona" class="form-control" id="nombre_Persona" required>
                     </div>
                     <div class="mb-3">
-                        <label for="registerEmail" class="form-label">Correo Electrónico</label>
-                        <input type="email" name="mail" class="form-control" id="registerEmail" required>
+                        <label for="mail" class="form-label">Correo Electrónico</label>
+                        <input type="email" name="mail" class="form-control" id="mail" required>
                     </div>
                     <div class="mb-3">
-                        <label for="registerPassword" class="form-label">Contraseña</label>
-                        <input type="password" name="contrasenia" class="form-control" id="registerPassword" required>
+                        <label for="Contrasenia_Cliente" class="form-label">Contraseña</label>
+                        <input type="password" name="Contrasenia_Cliente" class="form-control" id="Contrasenia_Cliente" required>
                     </div>
                     <div class="mb-3">
-                        <label for="registerPhone" class="form-label">Teléfono</label>
-                        <input type="tel" name="telefono" class="form-control" id="registerPhone" required>
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="tel" name="telefono" class="form-control" id="telefono" required>
                     </div>
                     <div class="mb-3">
-                        <label for="registerRut" class="form-label">RUT</label>
-                        <input type="text" name="rut_Persona" class="form-control" id="registerRut" placeholder="Ej: 12345678-9" required>
+                        <label for="rut_Persona" class="form-label">RUT</label>
+                        <input type="text" name="rut_Persona" class="form-control" id="rut_Persona" placeholder="Ej: 12345678-9" required>
                     </div>
                     <div class="mb-3">
-                        <label for="registerAddress" class="form-label">Dirección</label>
-                        <input type="text" name="direccion_cliente" class="form-control" id="registerAddress" required>
+                        <label for="direccion_cliente" class="form-label">Dirección</label>
+                        <input type="text" name="direccion_cliente" class="form-control" id="direccion_cliente" required>
                     </div>
                     <input type="hidden" name="origen" value="inicioVenta" />
                     <button type="submit" class="btn btn-success w-100">Registrarse</button>

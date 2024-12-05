@@ -40,11 +40,10 @@
         </dependency>
 
         <!-- Conector JDBC (MySQL) -->
-        
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version> <!-- Cambia por la versión que desees usar -->
+            <version>8.0.33</version>
         </dependency>
 
 
