@@ -41,48 +41,55 @@
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde aut nulla accusantium minus corporis accusamus fuga harum natus molestias necessitatibus.
+                                    Portal para agregar Categor�as de productos
 				</p>
 			</div>
 		</section>
 		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 			<div class="mdl-tabs__tab-bar">
-				<a href="#tabNewCategory" class="mdl-tabs__tab is-active">NEW</a>
-				<a href="#tabListCategory" class="mdl-tabs__tab">LIST</a>
+				<a href="#tabNewCategory" class="mdl-tabs__tab is-active">NUEVO</a>
+				<a href="#tabListCategory" class="mdl-tabs__tab">LISTA</a>
 			</div>
 			<div class="mdl-tabs__panel is-active" id="tabNewCategory">
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--12-col">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-primary text-center tittles">
-								New category
+								Nueva Categor�a
 							</div>
 							<div class="full-width panel-content">
-								<form>
+                                                                <form action="SvCategory" method="POST">
 									<div class="mdl-grid">
 										<div class="mdl-cell mdl-cell--12-col">
-									        <legend class="text-condensedLight"><i class="zmdi zmdi-border-color"></i> &nbsp; DATA CATEGORY</legend><br>
+									        <legend class="text-condensedLight"><i class="zmdi zmdi-border-color"></i> &nbsp; Informaci�n Categor�a</legend><br>
 									    </div>
-									    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+                                                                            <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NameCategory">
-												<label class="mdl-textfield__label" for="NameCategory">Name</label>
-												<span class="mdl-textfield__error">Invalid name</span>
+												<input class="mdl-textfield__input" type="number" name="idCategory" id="idCategory">
+                                                                                                <label class="mdl-textfield__label" for="idCategory"> ID Categoria</label>
+												<span class="mdl-textfield__error">Id Invalido</span>
 											</div>
 									    </div>
 									    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="descriptionCategory">
-												<label class="mdl-textfield__label" for="descriptionCategory">Description</label>
-												<span class="mdl-textfield__error">Invalid description</span>
+												<input class="mdl-textfield__input" type="text" name="NameCategory" ]*(\.[0-9]+)?" id="NameCategory">
+												<label class="mdl-textfield__label" for="NameCategory">Nombre</label>
+												<span class="mdl-textfield__error">Nombre inv�lido</span>
 											</div>
 									    </div>
+									    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+												<input class="mdl-textfield__input" type="text" name="descriptionCategory" id="descriptionCategory">
+												<label class="mdl-textfield__label" for="descriptionCategory">Descripcion</label>
+												<span class="mdl-textfield__error">Descripci�n inv�lida</span>
+											</div>
+									    </div>  
 									</div>
 									<p class="text-center">
 										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addCategory">
 											<i class="zmdi zmdi-plus"></i>
 										</button>
-										<div class="mdl-tooltip" for="btn-addCategory">Add category</div>
+										<div class="mdl-tooltip" for="btn-addCategory">A�adir Categor�a</div>
 									</p>
 								</form>
 							</div>

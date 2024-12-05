@@ -50,81 +50,65 @@
 				<a href="#tabNewClient" class="mdl-tabs__tab is-active">NUEVO</a>
 				<a href="#tabListClient" class="mdl-tabs__tab">LISTA</a>
 			</div>
-			<div class="mdl-tabs__panel is-active" id="tabNewClient">
-				<div class="mdl-grid">
-					<div class="mdl-cell mdl-cell--12-col">
-						<div class="full-width panel mdl-shadow--2dp">
-							<div class="full-width panel-tittle bg-primary text-center tittles">
-								Nuevo Cliente
-							</div>
-							<div class="full-width panel-content">
-								<form>
-									<div class="mdl-grid">
-										<div class="mdl-cell mdl-cell--12-col">
-									        <legend class="text-condensedLight"><i class="zmdi zmdi-border-color"></i> &nbsp; DATOS CLIENTE</legend><br>
-									    </div>
-									    <div class="mdl-cell mdl-cell--12-col">
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DNIClient">
-												<label class="mdl-textfield__label" for="DNIClient">DNI</label>
-												<span class="mdl-textfield__error">Numero inválido</span>
-											</div>
-									    </div>
-									    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-zÃ¡Ã©Ã­Ã³ÃºÃÃ‰ÃÃ“Ãš ]*(\.[0-9]+)?" id="NameClient">
-												<label class="mdl-textfield__label" for="NameClient">Nombre</label>
-												<span class="mdl-textfield__error">Nombre invalido</span>
-											</div>
-									    </div>
-									    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-zÃ¡Ã©Ã­Ã³ÃºÃÃ‰ÃÃ“Ãš ]*(\.[0-9]+)?" id="LastNameClient">
-												<label class="mdl-textfield__label" for="LastNameClient">Apellido</label>
-												<span class="mdl-textfield__error">Apellido incorrecto</span>
-											</div>
-									    </div>
-									    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" id="addressClient1">
-												<label class="mdl-textfield__label" for="addressClient1">Dirección 1</label>
-												<span class="mdl-textfield__error">Direccion invalida</span>
-											</div>
-									    </div>
-									    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" id="addressClient2">
-												<label class="mdl-textfield__label" for="addressClient2">Dirección 2</label>
-												<span class="mdl-textfield__error">Dirección invalida</span>
-											</div>
-									    </div>
-									    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="tel" pattern="-?[0-9+()- ]*(\.[0-9]+)?" id="phoneClient">
-												<label class="mdl-textfield__label" for="phoneClient">Telefono</label>
-												<span class="mdl-textfield__error">Numero de telefono invalido</span>
-											</div>
-									    </div>
-									    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="email" id="emailClient">
-												<label class="mdl-textfield__label" for="emailClient">E-mail</label>
-												<span class="mdl-textfield__error">E-mail invalido</span>
-											</div>
-									    </div>
-									</div>
-									<p class="text-center">
-										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addClient">
-											<i class="zmdi zmdi-plus"></i>
-										</button>
-										<div class="mdl-tooltip" for="btn-addClient">Añadir cliente</div>
-									</p>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<form action="SvCliente" method="POST">
+                            <div class="mdl-grid">
+                                <div class="mdl-cell mdl-cell--12-col">
+                                    <legend class="text-condensedLight">
+                                        <i class="zmdi zmdi-border-color"></i> &nbsp; DATOS CLIENTE
+                                    </legend><br>
+                                </div>
+                                <div class="mdl-cell mdl-cell--12-col">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="number" name="rut_Persona" id="rut_Persona" required>
+                                        <label class="mdl-textfield__label" for="rut_Persona">DNI</label>
+                                        <span class="mdl-textfield__error">Número inválido</span>
+                                    </div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="text" name="nombre_Persona" id="nombre_Persona" required>
+                                        <label class="mdl-textfield__label" for="nombre_Persona">Nombre</label>
+                                        <span class="mdl-textfield__error">Nombre inválido</span>
+                                    </div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="text" name="direccion_cliente" id="direccion_cliente">
+                                        <label class="mdl-textfield__label" for="direccion_cliente">Dirección</label>
+                                        <span class="mdl-textfield__error">Dirección inválida</span>
+                                    </div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="text" name="Contrasenia_Cliente" id="Contrasenia_Cliente">
+                                        <label class="mdl-textfield__label" for="Contrasenia_Cliente">Contraseña</label>
+                                        <span class="mdl-textfield__error">Contraseña inválida</span>
+                                    </div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="tel" name="telefono" id="telefono">
+                                        <label class="mdl-textfield__label" for="telefono">Teléfono</label>
+                                        <span class="mdl-textfield__error">Número de teléfono inválido</span>
+                                    </div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="email" name="mail" id="mail">
+                                        <label class="mdl-textfield__label" for="mail">E-mail</label>
+                                        <span class="mdl-textfield__error">E-mail inválido</span>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="origen" value="client" />
+                            </div>
+                            <p class="text-center">
+                                <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addClient">
+                                    <i class="zmdi zmdi-plus"></i>
+                                </button>
+                                <div class="mdl-tooltip" for="btn-addClient">Añadir cliente</div>
+                            </p>
+                        </form>
+
 			<div class="mdl-tabs__panel" id="tabListClient">
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">

@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
-    <!-- Define Persistence Unit -->
-    <persistence-unit name="my_persistence_unit">
-        
-    </persistence-unit>
+<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+
+  <!-- Definición de la unidad de persistencia -->
+  <persistence-unit name="rehobotdb">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    
+    <!-- Clases de entidad -->
+    <class>logica.Administrador</class>
+    <class>logica.Articulo</class>
+    <class>logica.Cliente</class>
+    <class>logica.Compra</class>
+    <class>logica.Empleado</class>
+    <class>logica.Persona</class>
+    <class>logica.Categoria></class>
+    
+    <!-- Propiedades de la base de datos -->
+    <properties>
+      <!-- Conexión JDBC -->
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/rehobotdb" />
+      <property name="jakarta.persistence.jdbc.user" value="root" />
+      <property name="jakarta.persistence.jdbc.password" value="" /> <!-- Aquí coloca la contraseña de tu base de datos -->
+      <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+      
+      <!-- Configuración de esquema -->
+      <property name="jakarta.persistence.schema-generation.database.action" value="update" /> <!-- Se actualizará el esquema de la BD si es necesario -->
+      
+      <!-- Configuración adicional -->
+      <property name="eclipselink.logging.level" value="FINE" /> <!-- Ajusta el nivel de log para depuración si es necesario -->
+      <property name="eclipselink.weaving" value="false" /> <!-- Opcional: Desactiva el weaving (si no lo necesitas) -->
+      <property name="eclipselink.cache.shared.default" value="false" /> <!-- Opcional: Desactiva el caché compartido -->
+    </properties>
+  </persistence-unit>
 </persistence>

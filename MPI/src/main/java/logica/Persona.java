@@ -13,10 +13,9 @@ import jakarta.persistence.InheritanceType;
 )
 public class Persona {
    @Id
-   @GeneratedValue(
-      strategy = GenerationType.IDENTITY
-   )
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id_Persona;
+   
    private String nombre_Persona;
    private String telefono;
    private String mail;

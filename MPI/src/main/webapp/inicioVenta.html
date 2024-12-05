@@ -17,24 +17,32 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!">Rehobot</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" href="#!">Catálogo</a></li>
-                </ul>
-                <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#shoppingCartModal">
-                    <i class="bi-cart-fill me-1"></i>
-                    Carrito
-                    <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart-count">0</span>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+            <li class="nav-item d-flex align-items-center">
+                <a class="nav-link active me-2" href="#!">Catálogo</a>
+                <button class="btn btn-outline-secondary btn-sm" onclick="window.location.href='index.html';">
+                    Volver al inicio
                 </button>
-            </div>
+            </li>
+        </ul>
+        <div class="d-flex">
+            <button class="btn btn-outline-primary me-2" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">
+                Iniciar sesión
+            </button>
+            <button class="btn btn-outline-success me-2" type="button" data-bs-toggle="modal" data-bs-target="#registerModal">
+                Registrarse
+            </button>
+            <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#shoppingCartModal">
+                <i class="bi-cart-fill me-1"></i>
+                Carrito
+                <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart-count">0</span>
+            </button>
         </div>
-    </nav>
+    </div>
+</nav>
+
     <!-- Header -->
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
@@ -100,7 +108,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-success">Finalizar Compra</button>
+                <button type="button" class="btn btn-success" id="finalizePurchaseButton">Finalizar Compra</button>
             </div>
         </div>
     </div>
@@ -124,38 +132,91 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeTransactionModal">Cerrar</button>
             </div>
         </div>
     </div>
 </div>
-    <!-- Modal para datos del cliente -->
-<div class="modal fade" id="customerDataModal" tabindex="-1" aria-labelledby="customerDataModalLabel" aria-hidden="true">
+<!-- Modal Iniciar Sesión -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="customerDataModalLabel">Datos del Cliente</h5>
+                <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="customerDataForm">
+                <form action="SvLoginClient" method="POST">
                     <div class="mb-3">
-                        <label for="customerName" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="customerName" required>
+                        <label for="loginEmail" class="form-label">Correo Electrónico</label>
+                        <input type="text" name="mail" class="form-control" id="loginEmail" required>
                     </div>
                     <div class="mb-3">
-                        <label for="customerEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="customerEmail" required>
+                        <label for="loginPassword" class="form-label">Contraseña</label>
+                        <input type="password" name="pass" class="form-control" id="loginPassword" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="customerAddress" class="form-label">Dirección</label>
-                        <input type="text" class="form-control" id="customerAddress" required>
-                    </div>
+                    <input type="hidden" name="origen" value="inicioVenta" />
+                    <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+    <!-- Modal de Éxito -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Registro Exitoso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¡Tu cuenta ha sido creada exitosamente! Ahora puedes iniciar sesión.</p>
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="submitCustomerData">Continuar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal de Registro -->
+
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Registrarse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="SvCliente" method="POST" >
+                    <div class="mb-3">
+                        <label for="nombre_Persona" class="form-label">Nombre y Apellido</label>
+                        <input type="text" name="nombre_Persona" class="form-control" id="nombre_Persona" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mail" class="form-label">Correo Electrónico</label>
+                        <input type="email" name="mail" class="form-control" id="mail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Contrasenia_Cliente" class="form-label">Contraseña</label>
+                        <input type="password" name="Contrasenia_Cliente" class="form-control" id="Contrasenia_Cliente" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="tel" name="telefono" class="form-control" id="telefono" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rut_Persona" class="form-label">RUT</label>
+                        <input type="text" name="rut_Persona" class="form-control" id="rut_Persona" placeholder="Ej: 12345678-9" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccion_cliente" class="form-label">Dirección</label>
+                        <input type="text" name="direccion_cliente" class="form-control" id="direccion_cliente" required>
+                    </div>
+                    <input type="hidden" name="origen" value="inicioVenta" />
+                    <button type="submit" class="btn btn-success w-100">Registrarse</button>
+                </form>
             </div>
         </div>
     </div>
@@ -171,19 +232,14 @@
         const price = parseInt($(this).data("price"));
         const img = $(this).data("img");
 
-        // Verificar si el producto ya existe en el carrito
         const product = cart.find(item => item.name === name);
         if (product) {
-            product.quantity += 1; // Incrementar cantidad
+            product.quantity += 1;
         } else {
-            // Añadir nuevo producto al carrito
             cart.push({ name, price, img, quantity: 1 });
         }
 
-        // Recalcular el total
         total += price;
-
-        // Actualizar el HTML del carrito
         renderCart();
     });
 
@@ -209,10 +265,9 @@
             `);
         });
 
-        $("#cart-count").text(cart.reduce((sum, item) => sum + item.quantity, 0)); // Actualizar contador
+        $("#cart-count").text(cart.reduce((sum, item) => sum + item.quantity, 0));
         $("#cart-total").text(total.toLocaleString("es-CL"));
 
-        // Agregar evento para actualizar cantidades
         $(".quantity-input").on("input", function () {
             const index = $(this).data("index");
             let newQuantity = parseInt($(this).val());
@@ -229,7 +284,6 @@
             renderCart();
         });
 
-        // Agregar evento para eliminar productos
         $(".remove-item").on("click", function () {
             const index = $(this).data("index");
             const item = cart[index];
@@ -240,36 +294,11 @@
         });
     }
 
-    // Mostrar formulario de datos del cliente al finalizar la compra
-    $(".btn-success").off("click").on("click", function () {
+    $("#finalizePurchaseButton").on("click", function () {
         if (cart.length === 0) {
             alert("El carrito está vacío. Agrega productos antes de finalizar la compra.");
             return;
         }
-        $("#customerDataModal").modal("show");
-    });
-
-    // Validar y procesar datos del cliente
-    $("#submitCustomerData").on("click", function () {
-        const name = $("#customerName").val().trim();
-        const email = $("#customerEmail").val().trim();
-        const address = $("#customerAddress").val().trim();
-
-         // Validación del correo
-        
-
-        if (!name|| !address) {
-            alert("Por favor, completa todos los campos.");
-            return;
-        }
-         // Validación del correo
-        const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/; // Verifica formato de correo
-        if (!emailRegex.test(email)) {
-            alert("Por favor, ingresa un correo electrónico válido.");
-            return;
-        }
-
-        $("#customerDataModal").modal("hide");
 
         const transactionId = "TXN" + Math.floor(Math.random() * 1000000);
         const dateTime = new Date().toLocaleString("es-CL");
@@ -290,16 +319,23 @@
         });
 
         $("#transaction-total").text(total.toLocaleString("es-CL"));
-
-        $transactionItems.append(`
-            <li class="mt-3">
-                <strong>Cliente:</strong> ${name}<br>
-                <strong>Email:</strong> ${email}<br>
-                <strong>Dirección:</strong> ${address}
-            </li>
-        `);
-
         $("#transactionModal").modal("show");
+    });
+
+    $("#closeTransactionModal").on("click", function () {
+        cart = [];
+        total = 0;
+        renderCart();
+    });
+     // Manejar el envío del formulario de registro
+    $("#registerForm").on("submit", function (event) {
+        event.preventDefault(); // Evita el envío real del formulario
+
+        // Aquí puedes agregar la lógica para enviar los datos al servidor (AJAX o fetch)
+
+        // Simular un registro exitoso
+        $("#registerModal").modal("hide"); // Cerrar el modal de registro
+        $("#successModal").modal("show"); // Mostrar el modal de éxito
     });
 </script>
 </body>

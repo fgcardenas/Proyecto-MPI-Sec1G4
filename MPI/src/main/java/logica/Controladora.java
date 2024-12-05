@@ -1,5 +1,6 @@
 package logica;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import persistencia.ControllerPersistencia;
@@ -10,10 +11,20 @@ public class Controladora {
     public Controladora() {
     }
 
-    public void crearArticulo(String nombre_Articulo, String catergoria_Articulo, int precio_Articulo, int stock,String link_Imagen, String marca_Articulo) {
-       Articulo articulo=new Articulo(nombre_Articulo, catergoria_Articulo, precio_Articulo, stock,link_Imagen,marca_Articulo);
-       this.controlPersis.crearArticulo(articulo);
-   }
+    public void crearArticulo(String nombre_Articulo, String catergoria_Articulo, int precio_Articulo, int stock, String link_Imagen, String marca_Articulo, LocalDate fechaVencimiento) {
+        Articulo articulo = new Articulo(nombre_Articulo, catergoria_Articulo, precio_Articulo, stock, link_Imagen, marca_Articulo, fechaVencimiento);
+        this.controlPersis.crearArticulo(articulo);
+    }
+
+    
+    public void crearCategoria(int id,String nombre,String descrip){
+        Categoria category = new Categoria(nombre,descrip,id);
+        this.controlPersis.crearCategoria(category);
+    }
+    
+    public List<Categoria> getCategories(){
+        return controlPersis.getCategorias();
+    }
 
     public List<Articulo> getArticulos() {
         return controlPersis.getArticulos();
@@ -44,11 +55,10 @@ public class Controladora {
         
         boolean ingreso=false;
         
-        List<Administrador> listaAdmin=new ArrayList<Administrador>();
-        listaAdmin=controlPersis.traerAdministrador();
+        List<Administrador> listaAdmin=controlPersis.traerAdministrador();
         
         for(Administrador admin:listaAdmin){
-            if(admin.getMail().equals(usuario)){
+            if(admin.getUsername().equals(usuario)){
                 if(admin.getPasswordAdmin().equals(contrasenia)){
                     ingreso=true;
                 }else{
@@ -155,7 +165,6 @@ public class Controladora {
         
         // Obtener lista de compras
         List<Compra> listaCompra = controlPersis.traerCompras();
-        boolean compraEncontrada = false;
 
         // Buscar la compra correspondiente al cliente
         for (Compra compra : listaCompra) {

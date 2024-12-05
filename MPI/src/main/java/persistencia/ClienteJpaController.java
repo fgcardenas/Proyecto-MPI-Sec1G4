@@ -19,7 +19,7 @@ public class ClienteJpaController implements Serializable {
    }
 
    public ClienteJpaController() {
-      this.emf = Persistence.createEntityManagerFactory("REHOBOT");
+      this.emf = Persistence.createEntityManagerFactory("rehobotdb");
    }
 
    public EntityManager getEntityManager() {

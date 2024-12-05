@@ -1,3 +1,5 @@
+<%@ page import="logica.Articulo" %>
+<%@ page import="java.util.List" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page import="jakarta.servlet.http.HttpServletRequest" %>
 
@@ -9,6 +11,7 @@
         response.sendRedirect("inicioInventario.jsp"); // Redirige al login si no hay sesiÛn
     }
 %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,90 +33,72 @@
 </head>
 <body>
 	<!-- navLateral -->
-	<%@include file="component/lateralBar.jsp" %>
+	<%@ include file="component/lateralBar.jsp" %>
 	<!-- pageContent -->
 	<section class="full-width pageContent">
 		<!-- navBar -->
-                <%@include file="component/navBarLogOut.jsp" %>
+		<%@ include file="component/navBarLogOut.jsp" %>
 		<section class="full-width header-well">
 			<div class="full-width header-well-icon">
 				<i class="zmdi zmdi-store"></i>
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">
-					Lista de productos actuales en exhibici√≥n de la p√°gina
+					Lista de productos actuales en exhibiciÛn de la p·gina
 				</p>
 			</div>
 		</section>
 		<div class="full-width divider-menu-h"></div>
-		<div class="mdl-grid">
-			<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-				<div class="table-responsive">
-					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
-						<thead>
-							<tr>
-								<th class="mdl-data-table__cell--non-numeric">Nombre</th>
-								<th>Codigo</th>
-								<th>Stock</th>
-								<th>Precio</th>
-								<th>Opciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="mdl-data-table__cell--non-numeric">Product Name</td>
-								<td>Product Code</td>
-								<td>7</td>
-								<td>$77</td>
-								<td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
-							</tr>
-							<tr>
-								<td class="mdl-data-table__cell--non-numeric">Product Name</td>
-								<td>Product Code</td>
-								<td>7</td>
-								<td>$77</td>
-								<td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
-							</tr>
-							<tr>
-								<td class="mdl-data-table__cell--non-numeric">Product Name</td>
-								<td>Product Code</td>
-								<td>7</td>
-								<td>$77</td>
-								<td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
-							</tr>
-							<tr>
-								<td class="mdl-data-table__cell--non-numeric">Product Name</td>
-								<td>Product Code</td>
-								<td>7</td>
-								<td>$77</td>
-								<td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
-							</tr>
-							<tr>
-								<td class="mdl-data-table__cell--non-numeric">Product Name</td>
-								<td>Product Code</td>
-								<td>7</td>
-								<td>$77</td>
-								<td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
-							</tr>
-							<tr>
-								<td class="mdl-data-table__cell--non-numeric">Product Name</td>
-								<td>Product Code</td>
-								<td>7</td>
-								<td>$77</td>
-								<td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
-							</tr>
-							<tr>
-								<td class="mdl-data-table__cell--non-numeric">Product Name</td>
-								<td>Product Code</td>
-								<td>7</td>
-								<td>$77</td>
-								<td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
+
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
+                <div class="table-responsive">
+                    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Nombre</th>
+                                <th>CÛdigo</th>
+                                <th>Stock</th>
+                                <th>Precio</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                            // Obtener la lista de productos
+                            List<Articulo> productos = (List<Articulo>) request.getAttribute("productos");
+
+                            // Verificar si la lista de productos no es null antes de recorrerla
+                            if (productos != null && !productos.isEmpty()) {
+                                // Recorrer los productos y mostrar las filas
+                                for (Articulo producto : productos) {
+                            %>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric"><%= producto.getNombre_Articulo() %></td>
+                                <td><%= producto.getId_Articulo() %></td>
+                                <td><%= producto.getStock() %></td>
+                                <td>$<%= producto.getPrecio_Articulo() %></td>
+                                <td>
+                                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                        <i class="zmdi zmdi-more"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <% 
+                                }
+                            } else {
+                            %>
+                            <tr>
+                                <td colspan="5">No hay productos disponibles</td>
+                            </tr>
+                            <% 
+                            }
+                            %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 	</section>
 </body>
 </html>
