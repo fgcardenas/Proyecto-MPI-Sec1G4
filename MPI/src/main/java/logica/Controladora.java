@@ -15,15 +15,8 @@ public class Controladora {
         Articulo articulo = new Articulo(nombre_Articulo, catergoria_Articulo, precio_Articulo, stock, link_Imagen, marca_Articulo, fechaVencimiento);
         this.controlPersis.crearArticulo(articulo);
     }
-
-    
-    public void crearCategoria(int id,String nombre,String descrip){
-        Categoria category = new Categoria(nombre,descrip,id);
-        this.controlPersis.crearCategoria(category);
-    }
-    
-    public List<Categoria> getCategories(){
-        return controlPersis.getCategorias();
+    public void actualizarArticulo(Articulo articulo){
+        this.controlPersis.editarArticulo(articulo);
     }
 
     public List<Articulo> getArticulos() {
@@ -187,6 +180,9 @@ public class Controladora {
         return listaCompra;
         
     }
+    public void eliminarProducto(int idProducto) {
+        controlPersis.eliminarProducto(idProducto);
+    }
 
     public void eliminarProducto(int idArticulo, int idUsuario) {
     // Obtener lista de compras
@@ -222,7 +218,16 @@ public class Controladora {
                 break;
             }
         }
+        
     }
+    public Articulo obtenerArticulo(int id){
+            for(Articulo article: controlPersis.getArticulos()){
+                if(article.getId_Articulo() == id){
+                    return article;
+                }
+            }
+            return null;
+        }
 
 
    

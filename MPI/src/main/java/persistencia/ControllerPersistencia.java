@@ -8,7 +8,6 @@ import logica.Articulo;
 import logica.Cliente;
 import logica.Compra;
 import logica.Persona;
-import logica.Categoria;
 import persistencia.exceptions.NonexistentEntityException;
 
 public class ControllerPersistencia {
@@ -18,7 +17,6 @@ public class ControllerPersistencia {
    CompraJpaController CompraJPA = new CompraJpaController();
    EmpleadoJpaController EmpJPA = new EmpleadoJpaController();
    PersonaJpaController PersoJPA = new PersonaJpaController();
-   CategoriaJpaController CategoJpa = new CategoriaJpaController();
 
    public ControllerPersistencia() {
    }
@@ -34,17 +32,10 @@ public class ControllerPersistencia {
         
     }
     
-    public void crearCategoria(Categoria category){
-        this.CategoJpa.create(category);
-        System.out.print("Hola");
-    }
 
     public List<Articulo> getArticulos() {
         return ArtiJPA.findArticuloEntities();
         
-    }
-    public List<Categoria> getCategorias(){
-        return CategoJpa.findCategoriaEntities();
     }
     
     public void editarArticulo(Articulo arti) {
@@ -114,6 +105,13 @@ public class ControllerPersistencia {
        } catch (NonexistentEntityException ex) {
            Logger.getLogger(ControllerPersistencia.class.getName()).log(Level.SEVERE, null, ex);
        }
+    }
+    public void editarProducto(Articulo articulo){
+        try{
+            this.ArtiJPA.edit(articulo);
+        }catch (Exception e){
+            Logger.getLogger(ControllerPersistencia.class.getName()).log(Level.SEVERE, null,e);
+        }
     }
  
   

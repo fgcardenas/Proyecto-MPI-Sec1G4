@@ -65,4 +65,12 @@
         <servlet-name>SvMostrarProductos</servlet-name>
         <url-pattern>/svmostrarproductos</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SvEliminarProducto</servlet-name>
+        <servlet-class>Servlets.SvEliminarProducto</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SvEliminarProducto</servlet-name>
+        <url-pattern>/sveliminarproducto</url-pattern>
+    </servlet-mapping>
 </web-app>

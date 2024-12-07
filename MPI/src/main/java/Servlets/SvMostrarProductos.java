@@ -23,18 +23,20 @@ public class SvMostrarProductos extends HttpServlet {
         control = new Controladora();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtener lista de productos
-        List<Articulo> productos = control.getArticulos();
+        List<Articulo> listaProductos = control.getArticulos();
         
-        if (productos != null) {
+        if (listaProductos != null) {
             // Establecer el atributo 'productos' en la solicitud
-            request.setAttribute("productos", productos);
+            request.setAttribute("listaProductos", listaProductos);
+
         } else {
             // Si no hay productos, puedes manejarlo como prefieras, como agregar un mensaje
-            request.setAttribute("productos", new ArrayList<Articulo>());
+            request.setAttribute("listaProductos", new ArrayList<Articulo>());
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("productos.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("inventory.jsp");
         dispatcher.forward(request, response);
     }
 }

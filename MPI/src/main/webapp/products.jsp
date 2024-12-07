@@ -34,7 +34,7 @@
 	<!-- pageContent -->
 	<section class="full-width pageContent">
 		<!-- navBar -->
-                <%@include file="component/navBarLogOut.jsp" %>
+        <%@include file="component/navBarLogOut.jsp" %>
 		<section class="full-width header-well">
 			<div class="full-width header-well-icon">
 				<i class="zmdi zmdi-washing-machine"></i>
@@ -58,154 +58,66 @@
 								Nuevo Producto
 							</div>
 							<div class="full-width panel-content">
-								<form action="SvArticulo" method="POST">
-                                                                    <div class="mdl-grid">
-                                                                        <div class="mdl-cell mdl-cell--12-col">
-                                                                            <legend class="text-condensedLight"><i class="zmdi zmdi-border-color"></i> &nbsp; INFORMACIÓN BÁSICA</legend><br>
-                                                                        </div>
-                                                                       
-                                                                        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-                                                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                                                <input class="mdl-textfield__input" type="text" id="nombre_Articulo" name="nombre_Articulo" required>
-                                                                                <label class="mdl-textfield__label" for="nombre_Articulo">Nombre del Artículo</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-                                                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                                                <input class="mdl-textfield__input" type="text" id="categoria_Articulo" name="categoria_Articulo" required>
-                                                                                <label class="mdl-textfield__label" for="categoria_Articulo">Categoría</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
-                                                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                                                <input class="mdl-textfield__input" type="number" id="precio_Articulo" name="precio_Articulo" required>
-                                                                                <label class="mdl-textfield__label" for="precio_Articulo">Precio</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
-                                                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                                                <input class="mdl-textfield__input" type="number" id="stock" name="stock" required>
-                                                                                <label class="mdl-textfield__label" for="stock">Stock</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
-                                                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                                                <input class="mdl-textfield__input" type="text" id="marca_Articulo" name="marca_Articulo" required>
-                                                                                <label class="mdl-textfield__label" for="marca_Articulo">Marca</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-                                                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                                                <input class="mdl-textfield__input" type="text" id="link_Imagen" name="link_Imagen">
-                                                                                <label class="mdl-textfield__label" for="link_Imagen">Link de Imagen</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-                                                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                                                <input class="mdl-textfield__input" type="date" id="fechaVencimiento" name="fechaVencimiento">
-                                                                                <label class="mdl-textfield__label" for="fechaVencimiento">Fecha de Vencimiento</label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <p class="text-center">
-                                                                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addProduct">
-                                                                            <i class="zmdi zmdi-plus"></i>
-                                                                        </button>
-                                                                    </p>
-                                                                </form>
-
-
+								<form action="SvArticulo" method="POST" enctype="multipart/form-data">
+                                    <div class="mdl-grid">
+                                        <div class="mdl-cell mdl-cell--12-col">
+                                            <legend class="text-condensedLight"><i class="zmdi zmdi-border-color"></i> &nbsp; INFORMACIÓN BÁSICA</legend><br>
+                                        </div>
+                                       
+                                        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="text" id="nombre_Articulo" name="nombre_Articulo" required>
+                                                <label class="mdl-textfield__label" for="nombre_Articulo">Nombre del Artículo</label>
+                                            </div>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="text" id="categoria_Articulo" name="categoria_Articulo" required>
+                                                <label class="mdl-textfield__label" for="categoria_Articulo">Categoría</label>
+                                            </div>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="number" id="precio_Articulo" name="precio_Articulo" required>
+                                                <label class="mdl-textfield__label" for="precio_Articulo">Precio</label>
+                                            </div>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="number" id="stock" name="stock" required>
+                                                <label class="mdl-textfield__label" for="stock">Stock</label>
+                                            </div>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="text" id="marca_Articulo" name="marca_Articulo" required>
+                                                <label class="mdl-textfield__label" for="marca_Articulo">Marca</label>
+                                            </div>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                                <input class="mdl-textfield__input" type="date" id="fechaVencimiento" name="fechaVencimiento">
+                                                <label class="mdl-textfield__label" for="fechaVencimiento">Fecha de Vencimiento</label>
+                                            </div>
+                                        </div>
+                                        <div class="mdl-cell mdl-cell--12-col">
+                                            <label for="imagen_Articulo">Cargar Imagen</label>
+                                            <input type="file" id="imagen_Articulo" name="imagen_Articulo" accept="image/*">
+                                        </div>
+                                    </div>
+                                    <p class="text-center">
+                                        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addProduct">
+                                            <i class="zmdi zmdi-plus"></i>
+                                        </button>
+                                    </p>
+                                </form>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="mdl-tabs__panel" id="tabListProducts">
-				<div class="mdl-grid">
-					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-						<form action="#">
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-								<label class="mdl-button mdl-js-button mdl-button--icon" for="searchProduct">
-									<i class="zmdi zmdi-search"></i>
-								</label>
-								<div class="mdl-textfield__expandable-holder">
-									<input class="mdl-textfield__input" type="text" id="searchProduct">
-									<label class="mdl-textfield__label"></label>
-								</div>
-							</div>
-						</form>
-						<nav class="full-width menu-categories">
-							<ul class="list-unstyle text-center">
-								<li><a href="#!">Category 1</a></li>
-								<li><a href="#!">Category 2</a></li>
-								<li><a href="#!">Category 3</a></li>
-								<li><a href="#!">Category 4</a></li>
-							</ul>
-						</nav>
-						<div class="full-width text-center" style="padding: 30px 0;">
-							<div class="mdl-card mdl-shadow--2dp full-width product-card">
-								<div class="mdl-card__title">
-									<img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-								</div>
-								<div class="mdl-card__supporting-text">
-									<small>Stock</small><br>
-									<small>Category</small>
-								</div>
-								<div class="mdl-card__actions mdl-card--border">
-									Product name
-									<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-										<i class="zmdi zmdi-more"></i>
-									</button>
-								</div>
-							</div>
-							<div class="mdl-card mdl-shadow--2dp full-width product-card">
-								<div class="mdl-card__title">
-									<img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-								</div>
-								<div class="mdl-card__supporting-text">
-									<small>Stock</small><br>
-									<small>Category</small>
-								</div>
-								<div class="mdl-card__actions mdl-card--border">
-									Product name
-									<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-										<i class="zmdi zmdi-more"></i>
-									</button>
-								</div>
-							</div>
-							<div class="mdl-card mdl-shadow--2dp full-width product-card">
-								<div class="mdl-card__title">
-									<img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-								</div>
-								<div class="mdl-card__supporting-text">
-									<small>Stock</small><br>
-									<small>Category</small>
-								</div>
-								<div class="mdl-card__actions mdl-card--border">
-									Product name
-									<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-										<i class="zmdi zmdi-more"></i>
-									</button>
-								</div>
-							</div>
-							<div class="mdl-card mdl-shadow--2dp full-width product-card">
-								<div class="mdl-card__title">
-									<img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
-								</div>
-								<div class="mdl-card__supporting-text">
-									<small>Stock</small><br>
-									<small>Category</small>
-								</div>
-								<div class="mdl-card__actions mdl-card--border">
-									Product name
-									<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-										<i class="zmdi zmdi-more"></i>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<!-- Contenido para listar productos -->
 			</div>
 		</div>
 	</section>

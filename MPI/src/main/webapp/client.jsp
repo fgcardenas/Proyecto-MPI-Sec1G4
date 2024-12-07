@@ -105,7 +105,7 @@
                                 <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addClient">
                                     <i class="zmdi zmdi-plus"></i>
                                 </button>
-                                <div class="mdl-tooltip" for="btn-addClient">Añadir cliente</div>
+                                <div class="mdl-tooltip" for="btn-addClient">Añadir Vendedor</div>
                             </p>
                         </form>
 
@@ -114,7 +114,7 @@
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-success text-center tittles">
-								Lista Clientes
+								Lista Vendedores
 							</div>
 							<div class="full-width panel-content">
 								<form action="#">

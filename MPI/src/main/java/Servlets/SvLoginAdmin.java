@@ -25,7 +25,7 @@ public class SvLoginAdmin extends HttpServlet {
         // Validación general
         boolean validation = control.comprobarIngreso(user, password);
         
-        if (validation || validateMainAdmin(user, password)) {
+        if (validation) {
             HttpSession mySession = request.getSession(true);
             mySession.setAttribute("userName", user);
             response.sendRedirect("home.jsp");  // Redirigir a home.jsp si es un administrador
@@ -33,12 +33,6 @@ public class SvLoginAdmin extends HttpServlet {
             response.sendRedirect("inicioInventario.jsp?error=1");  // Redirigir con error si la validación falla
         }
     }
-
-    private boolean validateMainAdmin(String userName, String password) {
-        // Validar el administrador principal
-        return "Claudio".equals(userName) && "123".equals(password);
-    }
-
     @Override
     public String getServletInfo() {
         return "Servlet de login que maneja distintos flujos dependiendo de la página que lo invoca";
