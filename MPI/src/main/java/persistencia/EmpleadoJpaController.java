@@ -150,4 +150,6 @@ public class EmpleadoJpaController implements Serializable {
 
       return var6;
    }
+   
+   
 }

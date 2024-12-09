@@ -73,4 +73,12 @@
         <servlet-name>SvEliminarProducto</servlet-name>
         <url-pattern>/sveliminarproducto</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SvEliminarAdmin</servlet-name>
+        <servlet-class>Servlets.SvEliminarAdmin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SvEliminarAdmin</servlet-name>
+        <url-pattern>/sveliminaradmin</url-pattern>
+    </servlet-mapping>
 </web-app>

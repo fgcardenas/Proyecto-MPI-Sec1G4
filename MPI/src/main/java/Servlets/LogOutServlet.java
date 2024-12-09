@@ -24,7 +24,7 @@ public class LogOutServlet extends HttpServlet {
         if (session != null) {
             session.invalidate(); // Invalidar la sesión
         }
-        response.sendRedirect("login.jsp"); // Redirigir a la página de inicio de sesión
+        response.sendRedirect("index.html"); // Redirigir a la página de inicio de sesión
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

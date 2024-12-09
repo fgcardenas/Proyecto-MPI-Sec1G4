@@ -31,6 +31,9 @@ public class Controladora {
     public List<Administrador> traerAdministrador() {
         return controlPersis.traerAdministrador();
     }
+    public List<Empleado> traerEmpleados(){
+        return controlPersis.traerEmpleados();
+    }
 
       public void eliminarAdmin(int id) {
         controlPersis.eliminarAdmin(id);
@@ -102,6 +105,10 @@ public class Controladora {
         }
         
         return id_Clien;
+    }
+    
+    public Empleado obtenerVendedor(int id){
+        return controlPersis.traerEmpleado(id);
     }
 
   
@@ -221,13 +228,14 @@ public class Controladora {
         
     }
     public Articulo obtenerArticulo(int id){
-            for(Articulo article: controlPersis.getArticulos()){
-                if(article.getId_Articulo() == id){
-                    return article;
-                }
-            }
-            return null;
+        for(Articulo article: controlPersis.getArticulos()){
+            if(article.getId_Articulo() == id){
+                return article;
+             }
         }
+        return null;
+    }
+   
 
 
    

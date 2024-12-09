@@ -24,21 +24,27 @@
 				<i class="zmdi zmdi-account-circle"></i>
 			</p>
 			<p class="text-center text-condensedLight">Inicie Sesión con cuenta Admin REHOBOT</p>
-                        <form action="SvLoginAdmin" method="POST">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="userName" name="userName">
-                                <label class="mdl-textfield__label" for="userName">Usuario</label>
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="password" id="contrasenia" name="contrasenia">
-                                <label class="mdl-textfield__label" for="contrasenia">Contraseña</label>
-                            </div>
-                            <input type="hidden" name="origen" value="inicioInventario" />
-                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #f77f07; margin: 0 auto; display: block;">
-                                Iniciar Sesión
-                            </button>
-                        </form>
-                </div>
+			<form action="SvLoginAdmin" method="POST">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input class="mdl-textfield__input" type="text" id="userName" name="userName">
+					<label class="mdl-textfield__label" for="userName">Usuario</label>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input class="mdl-textfield__input" type="password" id="contrasenia" name="contrasenia">
+					<label class="mdl-textfield__label" for="contrasenia">Contraseña</label>
+				</div>
+				<input type="hidden" name="origen" value="inicioInventario" />
+				<button class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #f77f07; margin: 0 auto; display: block;">
+					Iniciar Sesión
+				</button>
+			</form>
+			<!-- Botón para volver al menú -->
+			<div class="text-center" style="margin-top: 20px;">
+				<a href="index.html" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored bg-primary" style="text-transform: none;">
+					Volver al Menú
+				</a>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

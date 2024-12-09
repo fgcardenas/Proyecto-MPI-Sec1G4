@@ -34,6 +34,15 @@
 	--primary-color: #2B2B2C;
 	--acent-color: #DB763B;
 }
+form.initial .mdl-textfield__input:invalid + .mdl-textfield__label + .mdl-textfield__error {
+    display: none; /* Ocultar mensajes de error iniciales */
+}
+
+form:not(.initial) .mdl-textfield__input:invalid + .mdl-textfield__label + .mdl-textfield__error {
+    display: block; /* Mostrar errores solo después de intentar enviar */
+    color: red; /* Personaliza el estilo del mensaje de error */
+}
+
 html, body{
 	width: 100%;
 	height: 100%;

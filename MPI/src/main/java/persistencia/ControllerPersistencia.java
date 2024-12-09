@@ -7,6 +7,7 @@ import logica.Administrador;
 import logica.Articulo;
 import logica.Cliente;
 import logica.Compra;
+import logica.Empleado;
 import logica.Persona;
 import persistencia.exceptions.NonexistentEntityException;
 
@@ -49,6 +50,14 @@ public class ControllerPersistencia {
     public List<Administrador> traerAdministrador() {
         return AdminJPA.findAdministradorEntities();
 
+    }
+    
+    public List<Empleado> traerEmpleados(){
+        return EmpJPA.findEmpleadoEntities();
+    }
+    
+    public Empleado traerEmpleado(int id){
+        return EmpJPA.findEmpleado(id);
     }
 
     public void eliminarAdmin(int id) {
@@ -113,6 +122,7 @@ public class ControllerPersistencia {
             Logger.getLogger(ControllerPersistencia.class.getName()).log(Level.SEVERE, null,e);
         }
     }
+    
  
   
     
