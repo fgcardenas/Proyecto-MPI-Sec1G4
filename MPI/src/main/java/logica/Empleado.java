@@ -12,7 +12,6 @@ public class Empleado extends Persona {
    private String direccion;
    private String contrasenia;
    private String username;
-   private List<Compra> ventasRealizadas;
 
    public Empleado() {
    }
@@ -22,7 +21,6 @@ public class Empleado extends Persona {
       this.contrasenia = contrasenia;
       this.direccion = direccion;
       this.username = username;
-      ventasRealizadas = new ArrayList<>();
    }
 
    public String getContrasenia() {
@@ -41,9 +39,6 @@ public class Empleado extends Persona {
       this.sueldo_Empleado = sueldo_Empleado;
    }
    
-   public void addVenta(Compra compra){
-       ventasRealizadas.add(compra);
-   }
    public String getDireccion(){
        return direccion;
    }

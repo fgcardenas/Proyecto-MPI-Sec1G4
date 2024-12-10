@@ -39,8 +39,11 @@ public class ControllerPersistencia {
     
 
     public List<Articulo> getArticulos() {
-        return ArtiJPA.findArticuloEntities();
-        
+        return ArtiJPA.findArticuloEntities(); 
+    }
+    
+    public List<Compra> getCompras(){
+        return CompraJPA.findCompraEntities();
     }
     
     public void editarArticulo(Articulo arti) {
@@ -71,6 +74,13 @@ public class ControllerPersistencia {
            Logger.getLogger(ControllerPersistencia.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
+    public void eliminarEmpleado(int id){
+        try{
+            EmpJPA.destroy(id);
+        } catch (NonexistentEntityException ex){
+            Logger.getLogger(ControllerPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public Administrador traerAdministrador(int id) {
        return AdminJPA.findAdministrador(id);
@@ -82,6 +92,13 @@ public class ControllerPersistencia {
        } catch (Exception ex) {
            Logger.getLogger(ControllerPersistencia.class.getName()).log(Level.SEVERE, null, ex);
        }
+    }
+    public void editarVendedor(Empleado seller){
+        try{
+            EmpJPA.edit(seller);
+        } catch (Exception ex){
+           Logger.getLogger(ControllerPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void crearCliente(Cliente clien) {

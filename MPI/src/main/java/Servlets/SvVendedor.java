@@ -1,84 +1,61 @@
-
 package Servlets;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import logica.Controladora;
 
-/**
- *
- * @author farit
- */
-@WebServlet(name = "SvVendedor", urlPatterns = {"/SvVendedor"})
+import java.io.IOException;
+
+@WebServlet("/SvVendedor")
 public class SvVendedor extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    Controladora control = new Controladora();
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SvVendedor</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SvVendedor at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        // Obtener los parámetros del formulario
+        String rut = request.getParameter("rut_Vendedor");
+        String nombre = request.getParameter("nombre_Vendedor");
+        String apellido = request.getParameter("apellido_Vendedor");
+        String telefono = request.getParameter("telefono_Vendedor");
+        String email = request.getParameter("mail_Vendedor");
+        String direccion = request.getParameter("direccion_Vendedor");
+        String contrasenia = request.getParameter("Contrasenia_Vendedor");
+        String sueldoStr = request.getParameter("sueldo_Vendedor");
+        String nombreUsuario = request.getParameter("nombreUsuario_Vendedor");
+
+        // Validar y convertir datos si es necesario
+        int sueldo = 0;
+        try {
+            sueldo = Integer.parseInt(sueldoStr);
+        } catch (NumberFormatException e) {
+            // Manejo de errores: sueldo inválido
+            request.setAttribute("error", "El sueldo ingresado no es válido.");
+            request.getRequestDispatcher("errorPage.jsp").forward(request, response);
+            return;
         }
+
+        // Validaciones adicionales (opcional)
+        if (rut == null || nombre == null || apellido == null || contrasenia == null || nombreUsuario == null ||
+                rut.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || contrasenia.isEmpty() || nombreUsuario.isEmpty()) {
+            request.setAttribute("error", "Todos los campos obligatorios deben estar completos.");
+            request.getRequestDispatcher("errorPage.jsp").forward(request, response);
+            return;
+        }
+        String nombreCompleto = nombre+" "+apellido;
+        control.crearVendedor(nombreCompleto,telefono,email,rut,sueldo,direccion,contrasenia,nombreUsuario);
+
+        // Simulación de éxito
+        request.setAttribute("mensaje", "Vendedor registrado exitosamente.");
+        request.getRequestDispatcher("seller.jsp").forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        processRequest(request, response);
+        // Redirige a la página principal si se accede por GET
+        response.sendRedirect("index.jsp");
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

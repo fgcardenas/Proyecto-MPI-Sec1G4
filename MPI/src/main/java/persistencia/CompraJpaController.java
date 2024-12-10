@@ -105,7 +105,7 @@ public class CompraJpaController implements Serializable {
         }
     }
 
-    public Compra findCompra(int id) {
+    public Compra findCompra(String id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Compra.class, id);

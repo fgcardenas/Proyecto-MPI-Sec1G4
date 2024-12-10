@@ -22,6 +22,10 @@ public class Controladora {
     public List<Articulo> getArticulos() {
         return controlPersis.getArticulos();
     }
+    
+    public List<Compra> getCompras(){
+        return controlPersis.getCompras();
+    }
 
     public void crearAdmin(String nombre_Persona, String Contrasenia_Admin, String telefono, String mail, String rut_Persona, String direccion_Tienda, String username) {
         Administrador admin = new Administrador(direccion_Tienda, username, Contrasenia_Admin, nombre_Persona, telefono, mail, rut_Persona);
@@ -36,8 +40,15 @@ public class Controladora {
         Empleado seller = new Empleado(contrasenia,sueldo, name, telefono, mail, rut, direccion, username); 
         this.controlPersis.crearVendedor(seller);
     }
+    public void crearCompra(String idCompra,String fecha, String lista_Articulos, String direccionEnvio, String vendedor, String nombreCliente, String telefonoCliente, int monto, String metodoPago){
+        Compra compra = new Compra(idCompra,fecha, lista_Articulos,direccionEnvio, vendedor, nombreCliente, telefonoCliente, monto,metodoPago );
+        this.controlPersis.crearCompra(compra);
+    }
     public List<Empleado> traerEmpleados(){
         return controlPersis.traerEmpleados();
+    }
+    public void eliminarVendedor(int id){
+        controlPersis.eliminarEmpleado(id);
     }
 
       public void eliminarAdmin(int id) {
@@ -50,6 +61,9 @@ public class Controladora {
 
     public void editarAdmin(Administrador admin) {
         controlPersis.editarAdmin(admin);
+    }
+    public void editarVendedor(Empleado seller){
+        controlPersis.editarVendedor(seller);
     }
 
     public boolean comprobarIngreso(String usuario, String contrasenia) {
@@ -95,70 +109,7 @@ public class Controladora {
         return controlPersis.traerEmpleado(id);
     }
 
-  
-   public void AgregarArticulo(int idCliente, int idArticulo) {
-        // Obtener lista de todos los artículos
-        List<Articulo> listaArticulo = controlPersis.getArticulos();
-
-        // Buscar y actualizar el artículo en la lista de artículos
-        boolean articuloEncontrado = false;
-        for (Articulo arti : listaArticulo) {
-            System.out.println("arti: " + arti.getNombre_Articulo());
-            if (arti.getId_Articulo() == idArticulo) {
-                arti.setStock(arti.getStock() - 1);
-                controlPersis.editarArticulo(arti);
-                articuloEncontrado = true;
-                break;
-            }
-        }
-
-        if (!articuloEncontrado) {
-            System.out.println("No se encontró el artículo con ID: " + idArticulo);
-            return;  // Salir si el artículo no existe
-        }
-
-        // Obtener lista de compras
-        List<Compra> listaCompra = controlPersis.traerCompras();
-        boolean compraEncontrada = false;
-
-        // Buscar la compra correspondiente al cliente
-        for (Compra compra : listaCompra) {
-            if (compra.getCliente() == idCliente) {
-                compra.getArticulos().add(idArticulo); // Añadir idArticulo a la lista de la compra
-                controlPersis.editarCompra(compra); // Guardar cambios en la compra
-                compraEncontrada = true;
-                System.out.println("Artículo añadido a la compra del cliente con ID: " + idCliente);
-                break;
-            }
-        }
-
-        // Si no se encontró ninguna compra para el cliente, crear una nueva
-        if (!compraEncontrada) {
-            Compra nuevaCompra = new Compra();
-            nuevaCompra.setCliente(idCliente);
-            List<Integer> listaCompraId = new ArrayList<>();
-            listaCompraId.add(idArticulo);
-            nuevaCompra.setArticulos(listaCompraId);
-
-            controlPersis.crearCompra(nuevaCompra); // Guardar la nueva compra en la base de datos
-            System.out.println("Nueva compra creada para el cliente con ID: " + idCliente + " y artículo añadido.");
-        }
-    }
-
-    public List<Integer> traerCompra(int idCliente) {
-        
-        // Obtener lista de compras
-        List<Compra> listaCompra = controlPersis.traerCompras();
-
-        // Buscar la compra correspondiente al cliente
-        for (Compra compra : listaCompra) {
-            if (compra.getCliente() == idCliente) {
-                return compra.getArticulos();
-                
-            }
-        }
-        return null;
-    }
+    
 
     public List<Articulo> buscarArticulos(List<Integer> listaArticulos) {
         
@@ -174,43 +125,6 @@ public class Controladora {
     public void eliminarProducto(int idProducto) {
         controlPersis.eliminarProducto(idProducto);
     }
-
-    public void eliminarProducto(int idArticulo, int idUsuario) {
-    // Obtener lista de compras
-    List<Compra> listaCompra = controlPersis.traerCompras();
-    
-        for (Compra compra : listaCompra) {
-            // Verificar si la compra corresponde al cliente indicado
-            if (compra.getCliente() == idUsuario) {
-                System.out.println("Cliente " + compra.getCliente());
-
-                // Eliminar el idArticulo de la lista de artículos en la compra
-                List<Integer> articulos = compra.getArticulos();
-                if (articulos.remove(Integer.valueOf(idArticulo))) { // Eliminar si se encuentra
-                    controlPersis.editarCompra(compra); // Guardar cambios en la compra
-                    System.out.println("Se eliminó el artículo " + idArticulo);
-                } else {
-                    System.out.println("El artículo " + idArticulo + " no se encontró en la compra del cliente " + idUsuario);
-                }
-            }
-        }
-
-        // Obtener lista de todos los artículos
-        List<Articulo> listaArticulo = controlPersis.getArticulos();
-
-        // Buscar y actualizar el artículo en la lista de artículos
-        boolean articuloEncontrado = false;
-        for (Articulo arti : listaArticulo) {
-            System.out.println("arti: " + arti.getNombre_Articulo());
-            if (arti.getId_Articulo() == idArticulo) {
-                arti.setStock(arti.getStock() + 1);
-                controlPersis.editarArticulo(arti);
-                articuloEncontrado = true;
-                break;
-            }
-        }
-        
-    }
     public Articulo obtenerArticulo(int id){
         for(Articulo article: controlPersis.getArticulos()){
             if(article.getId_Articulo() == id){
@@ -219,6 +133,8 @@ public class Controladora {
         }
         return null;
     }
+
+    
    
 
 

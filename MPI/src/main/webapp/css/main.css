@@ -862,4 +862,24 @@ html, body{
 		right: 122%;
 		text-align: right;
 	}
+        .mdl-textfield__input:invalid {
+        border-color: red !important;
+        }
+
+        .mdl-textfield__input:valid {
+            border-color: green !important;
+        }
+
+        .mdl-textfield__input:focus:invalid {
+            outline: none;
+            border-color: darkred !important;
+            box-shadow: 0 0 5px red;
+        }
+
+        .mdl-textfield__input:focus:valid {
+            outline: none;
+            border-color: darkgreen !important;
+            box-shadow: 0 0 5px green;
+        }
+
 }
