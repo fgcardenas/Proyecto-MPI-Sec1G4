@@ -7,8 +7,8 @@ import logica.Administrador;
 import logica.Articulo;
 import logica.Cliente;
 import logica.Compra;
+import logica.Empleado;
 import logica.Persona;
-import logica.Categoria;
 import persistencia.exceptions.NonexistentEntityException;
 
 public class ControllerPersistencia {
@@ -18,7 +18,6 @@ public class ControllerPersistencia {
    CompraJpaController CompraJPA = new CompraJpaController();
    EmpleadoJpaController EmpJPA = new EmpleadoJpaController();
    PersonaJpaController PersoJPA = new PersonaJpaController();
-   CategoriaJpaController CategoJpa = new CategoriaJpaController();
 
    public ControllerPersistencia() {
    }
@@ -27,6 +26,10 @@ public class ControllerPersistencia {
       this.AdminJPA.create(admin);
       System.out.println("Hola");
    }
+   public void crearVendedor(Empleado employee){
+       this.EmpJPA.create(employee);
+       System.out.println("Hola");
+   }
 
     public void crearArticulo(Articulo articulo) {
         this.ArtiJPA.create(articulo);
@@ -34,17 +37,10 @@ public class ControllerPersistencia {
         
     }
     
-    public void crearCategoria(Categoria category){
-        this.CategoJpa.create(category);
-        System.out.print("Hola");
-    }
 
     public List<Articulo> getArticulos() {
         return ArtiJPA.findArticuloEntities();
         
-    }
-    public List<Categoria> getCategorias(){
-        return CategoJpa.findCategoriaEntities();
     }
     
     public void editarArticulo(Articulo arti) {
@@ -58,6 +54,14 @@ public class ControllerPersistencia {
     public List<Administrador> traerAdministrador() {
         return AdminJPA.findAdministradorEntities();
 
+    }
+    
+    public List<Empleado> traerEmpleados(){
+        return EmpJPA.findEmpleadoEntities();
+    }
+    
+    public Empleado traerEmpleado(int id){
+        return EmpJPA.findEmpleado(id);
     }
 
     public void eliminarAdmin(int id) {
@@ -115,6 +119,15 @@ public class ControllerPersistencia {
            Logger.getLogger(ControllerPersistencia.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
+    public void editarProducto(Articulo articulo){
+        try{
+            this.ArtiJPA.edit(articulo);
+        }catch (Exception e){
+            Logger.getLogger(ControllerPersistencia.class.getName()).log(Level.SEVERE, null,e);
+        }
+    }
+    
+    
  
   
     

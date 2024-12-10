@@ -58,11 +58,35 @@
         <url-pattern>/svcategory</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>SvMostrarProductos</servlet-name>
-        <servlet-class>Servlets.SvMostrarProductos</servlet-class>
+        <servlet-name>SvLoginVendedor</servlet-name>
+        <servlet-class>Servlets.SvLoginVendedor</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>SvMostrarProductos</servlet-name>
-        <url-pattern>/svmostrarproductos</url-pattern>
+        <servlet-name>SvLoginVendedor</servlet-name>
+        <url-pattern>/svloginvendedor</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SvEliminarProducto</servlet-name>
+        <servlet-class>Servlets.SvEliminarProducto</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SvEliminarProducto</servlet-name>
+        <url-pattern>/sveliminarproducto</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SvEliminarAdmin</servlet-name>
+        <servlet-class>Servlets.SvEliminarAdmin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SvEliminarAdmin</servlet-name>
+        <url-pattern>/sveliminaradmin</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SvEditarAdmin</servlet-name>
+        <servlet-class>Servlets.SvEditarAdmin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SvEditarAdmin</servlet-name>
+        <url-pattern>/sveditaradmin</url-pattern>
     </servlet-mapping>
 </web-app>

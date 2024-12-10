@@ -15,15 +15,8 @@ public class Controladora {
         Articulo articulo = new Articulo(nombre_Articulo, catergoria_Articulo, precio_Articulo, stock, link_Imagen, marca_Articulo, fechaVencimiento);
         this.controlPersis.crearArticulo(articulo);
     }
-
-    
-    public void crearCategoria(int id,String nombre,String descrip){
-        Categoria category = new Categoria(nombre,descrip,id);
-        this.controlPersis.crearCategoria(category);
-    }
-    
-    public List<Categoria> getCategories(){
-        return controlPersis.getCategorias();
+    public void actualizarArticulo(Articulo articulo){
+        this.controlPersis.editarArticulo(articulo);
     }
 
     public List<Articulo> getArticulos() {
@@ -37,6 +30,14 @@ public class Controladora {
 
     public List<Administrador> traerAdministrador() {
         return controlPersis.traerAdministrador();
+    }
+    
+    public void crearVendedor(String name, String telefono, String mail, String rut, int sueldo, String direccion, String contrasenia, String username){
+        Empleado seller = new Empleado(contrasenia,sueldo, name, telefono, mail, rut, direccion, username); 
+        this.controlPersis.crearVendedor(seller);
+    }
+    public List<Empleado> traerEmpleados(){
+        return controlPersis.traerEmpleados();
     }
 
       public void eliminarAdmin(int id) {
@@ -70,21 +71,16 @@ public class Controladora {
         return ingreso;
     }
 
-     
-    public void crearCliente(String nombre_Persona, String Contrasenia_Cliente, String telefono, String mail, String rut_Persona, String direccion_cliente) {
-        Cliente clien = new Cliente(direccion_cliente, Contrasenia_Cliente, nombre_Persona, telefono, mail, rut_Persona);
-        this.controlPersis.crearCliente(clien);
-    }
 
-    public boolean comprobarIngresoCliente(String usuario, String contrasenia) {
+    public boolean comprobarIngresoVendedor(String usuario, String contrasenia) {
        boolean ingreso=false;
         
-        List<Cliente> listaClien=new ArrayList<Cliente>();
-        listaClien=controlPersis.traerCliente();
+        List<Empleado> listaSeller=new ArrayList<Empleado>();
+        listaSeller=controlPersis.traerEmpleados();
         
-        for(Cliente clien:listaClien){
-            if(clien.getMail().equals(usuario)){
-                if(clien.getPasswordCliente().equals(contrasenia)){
+        for(Empleado clien:listaSeller){
+            if(clien.getUsername().equals(usuario)){
+                if(clien.getContrasenia().equals(contrasenia)){
                     ingreso=true;
                 }else{
                     ingreso=false;
@@ -94,21 +90,9 @@ public class Controladora {
         }
         return ingreso;
     }
-
-    public int obtenerCliente(String usuario) {
-        int id_Clien=0;
-                
-        List<Cliente> listaClien=new ArrayList<Cliente>();
-        listaClien=controlPersis.traerCliente();
-        
-        for(Cliente clien:listaClien){
-            if(clien.getMail().equals(usuario)){
-                id_Clien=clien.getId_Persona();
-            }
-            
-        }
-        
-        return id_Clien;
+    
+    public Empleado obtenerVendedor(int id){
+        return controlPersis.traerEmpleado(id);
     }
 
   
@@ -187,6 +171,9 @@ public class Controladora {
         return listaCompra;
         
     }
+    public void eliminarProducto(int idProducto) {
+        controlPersis.eliminarProducto(idProducto);
+    }
 
     public void eliminarProducto(int idArticulo, int idUsuario) {
     // Obtener lista de compras
@@ -222,7 +209,17 @@ public class Controladora {
                 break;
             }
         }
+        
     }
+    public Articulo obtenerArticulo(int id){
+        for(Articulo article: controlPersis.getArticulos()){
+            if(article.getId_Articulo() == id){
+                return article;
+             }
+        }
+        return null;
+    }
+   
 
 
    

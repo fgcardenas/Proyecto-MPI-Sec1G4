@@ -35,9 +35,8 @@ public class SvEliminarProd extends HttpServlet {
         String usuario = request.getParameter("idUsuario");
         System.out.println("ID a eliminar: "+ id);
         System.out.println("ID a eliminar: "+ usuario);
-        int idCliente=control.obtenerCliente(usuario);
-        
-        control.eliminarProducto(id,idCliente);
+
+
         System.out.println("Se eliminara el articul: " +id );
         response.sendRedirect("indexClien.jsp");
     }

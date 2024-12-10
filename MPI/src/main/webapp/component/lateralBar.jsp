@@ -7,7 +7,7 @@
 		<div class="full-width navLateral-bg btn-menu"></div>
 		<div class="full-width navLateral-body">
 			<div class="full-width navLateral-body-logo text-center tittles">
-				<i class="zmdi zmdi-close btn-menu"></i> Inventario
+				<i class="zmdi zmdi-close btn-menu"></i> ADMINISTRACION
 			</div>
 			<figure class="full-width navLateral-body-tittle-menu">
                             <div>
@@ -54,16 +54,6 @@
 									</div>
 								</a>
 							</li>
-							<li class="full-width">
-								<a href="categories.jsp" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-label"></i>
-									</div>
-									<div class="navLateral-body-cr">
-										CATEGORIAS
-									</div>
-								</a>
-							</li>
 						</ul>
 					</li>
 					<li class="full-width divider-menu-h"></li>
@@ -89,12 +79,12 @@
 								</a>
 							</li>
 							<li class="full-width">
-								<a href="client.jsp" class="full-width">
+								<a href="seller.jsp" class="full-width">
 									<div class="navLateral-body-cl">
 										<i class="zmdi zmdi-accounts"></i>
 									</div>
 									<div class="navLateral-body-cr">
-										CLIENTE
+										VENDEDORES
 									</div>
 								</a>
 							</li>

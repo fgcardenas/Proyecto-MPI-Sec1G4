@@ -32,12 +32,7 @@ public class SvCompra extends HttpServlet {
         
         String usuario = request.getParameter("idUsuario");
         System.out.println("id 1: "+usuario);
-        
-        int idCliente=control.obtenerCliente(usuario);
 
-       
-        listaArticulos=control.traerCompra(idCliente);
-        System.out.println("id 3: "+idCliente);
         listaCompras=control.buscarArticulos(listaArticulos);
                       
         HttpSession mySession=request.getSession();
@@ -58,10 +53,6 @@ public class SvCompra extends HttpServlet {
         int idArticulo = Integer.parseInt(request.getParameter("idArticulo"));
         String usuario = request.getParameter("idUsuario");
         
-        int idCliente=control.obtenerCliente(usuario);
-        
-        control.AgregarArticulo(idCliente,idArticulo);
-        System.out.println("idCliente: "+ idCliente);
         response.sendRedirect("tienda.jsp");
     }
 

@@ -1,44 +1,61 @@
 package logica;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name="vendedores")
 public class Empleado extends Persona {
-   private String puesto_Emplead;
-   private String sueldo_Empleado;
-   private String asistencia;
+   private int sueldo_Empleado;
+   private String direccion;
+   private String contrasenia;
+   private String username;
+   private List<Compra> ventasRealizadas;
 
    public Empleado() {
    }
 
-   public Empleado(String puesto_Emplead, String sueldo_Empleado, String asistencia, String nombre_Persona, String telefono, String mail, String rut_Persona) {
+   public Empleado(String contrasenia, int sueldo_Empleado, String nombre_Persona, String telefono, String mail, String rut_Persona, String direccion, String username) {
       super( nombre_Persona, telefono, mail, rut_Persona);
-      this.puesto_Emplead = puesto_Emplead;
-      this.sueldo_Empleado = sueldo_Empleado;
-      this.asistencia = asistencia;
+      this.contrasenia = contrasenia;
+      this.direccion = direccion;
+      this.username = username;
+      ventasRealizadas = new ArrayList<>();
    }
 
-   public String getPuesto_Emplead() {
-      return this.puesto_Emplead;
+   public String getContrasenia() {
+      return this.contrasenia;
    }
 
-   public void setPuesto_Emplead(String puesto_Emplead) {
-      this.puesto_Emplead = puesto_Emplead;
+   public void setContrasenia(String contra) {
+      this.contrasenia = contra;
    }
 
-   public String getSueldo_Empleado() {
+   public int getSueldo_Empleado() {
       return this.sueldo_Empleado;
    }
 
-   public void setSueldo_Empleado(String sueldo_Empleado) {
+   public void setSueldo_Empleado(int sueldo_Empleado) {
       this.sueldo_Empleado = sueldo_Empleado;
    }
-
-   public String getAsistencia() {
-      return this.asistencia;
+   
+   public void addVenta(Compra compra){
+       ventasRealizadas.add(compra);
    }
-
-   public void setAsistencia(String asistencia) {
-      this.asistencia = asistencia;
+   public String getDireccion(){
+       return direccion;
+   }
+   public void setDireccion(String newdirection){
+       this.direccion = newdirection;
+   }
+   
+   public String getUsername(){
+       return username;
+   }
+   
+   public void setUsername(String user){
+       this.username = user;
    }
 }

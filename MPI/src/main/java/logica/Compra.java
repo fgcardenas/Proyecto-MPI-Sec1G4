@@ -26,6 +26,8 @@ public class Compra {
    private List<Integer> lista_Articulos;  // Cambiado a List<Integer>
    private String direccionEnvio;
    private Empleado vendedor;
+   private String[] datosCliente;
+   
 
    public Compra() {
    }
@@ -72,4 +74,5 @@ public class Compra {
    public String getVendedor(){
        return vendedor.getNombre_Persona();
    }
+   
 }

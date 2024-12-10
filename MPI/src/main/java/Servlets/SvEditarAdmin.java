@@ -1,4 +1,4 @@
-package servlets;
+package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +12,7 @@ import logica.Administrador;
 import logica.Controladora;
 
 
-@WebServlet(name = "SvEditarAdmin", urlPatterns = {"/SvEditarAdmin"})
+@WebServlet("/SvEditarAdmin")
 public class SvEditarAdmin extends HttpServlet {
 
     Controladora control =new Controladora();
@@ -26,7 +26,7 @@ public class SvEditarAdmin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id= Integer.parseInt(request.getParameter("id"));
+        int id= Integer.parseInt(request.getParameter("adminId"));
         Administrador admin=control.traerAdministrador(id);
         
         HttpSession mySession= request.getSession();
@@ -41,27 +41,22 @@ public class SvEditarAdmin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String nombre_Persona=request.getParameter("nombre_Persona");
+        int adminId =Integer.parseInt(request.getParameter("id_Admin"));
         String telefono=request.getParameter("telefono");
         String mail=request.getParameter("mail");
-        String rut_Persona=request.getParameter("rut_Persona");
-        String direccion_Tienda=request.getParameter("direccion_Tienda");
-        String Contrasenia_Admin=request.getParameter("Contrasenia_Admin");
-        String usernameAdmin = request.getParameter("usernameAdmin");
+        String direccion_Tienda=request.getParameter("direccion");
+        String Contrasenia_Admin=request.getParameter("password");
         
-        Administrador admin = (Administrador) request.getSession().getAttribute("AdminEditar");
+        Administrador admin = control.traerAdministrador(adminId);
         
-        admin.setNombre_Persona(nombre_Persona);
         admin.setTelefono(telefono);
         admin.setMail(mail);
-        admin.setRut_Persona(rut_Persona);
         admin.setDireccion_Tienda(direccion_Tienda);
         admin.setContrasenia_Admin(Contrasenia_Admin);
-        admin.setUsername(usernameAdmin);
         
         control.editarAdmin(admin);
         
-        response.sendRedirect("trabajadores.jsp");
+        response.sendRedirect("admin.jsp");
     }
 
     
