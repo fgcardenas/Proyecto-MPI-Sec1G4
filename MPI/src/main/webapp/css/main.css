@@ -283,6 +283,14 @@ html, body{
 	color: var(--color-text);
 	background-image: url(../img/Sala_de_Ventas.jpg);
 }
+.login-wrapp{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    background-image: url(../img/mostrador.jpg);
+}
 .container-login{
 	width: 100%;
 	max-width: 300px;

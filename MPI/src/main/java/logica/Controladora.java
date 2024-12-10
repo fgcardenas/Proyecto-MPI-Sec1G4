@@ -31,6 +31,11 @@ public class Controladora {
     public List<Administrador> traerAdministrador() {
         return controlPersis.traerAdministrador();
     }
+    
+    public void crearVendedor(String name, String telefono, String mail, String rut, int sueldo, String direccion, String contrasenia, String username){
+        Empleado seller = new Empleado(contrasenia,sueldo, name, telefono, mail, rut, direccion, username); 
+        this.controlPersis.crearVendedor(seller);
+    }
     public List<Empleado> traerEmpleados(){
         return controlPersis.traerEmpleados();
     }
@@ -66,21 +71,16 @@ public class Controladora {
         return ingreso;
     }
 
-     
-    public void crearCliente(String nombre_Persona, String Contrasenia_Cliente, String telefono, String mail, String rut_Persona, String direccion_cliente) {
-        Cliente clien = new Cliente(direccion_cliente, Contrasenia_Cliente, nombre_Persona, telefono, mail, rut_Persona);
-        this.controlPersis.crearCliente(clien);
-    }
 
-    public boolean comprobarIngresoCliente(String usuario, String contrasenia) {
+    public boolean comprobarIngresoVendedor(String usuario, String contrasenia) {
        boolean ingreso=false;
         
-        List<Cliente> listaClien=new ArrayList<Cliente>();
-        listaClien=controlPersis.traerCliente();
+        List<Empleado> listaSeller=new ArrayList<Empleado>();
+        listaSeller=controlPersis.traerEmpleados();
         
-        for(Cliente clien:listaClien){
-            if(clien.getMail().equals(usuario)){
-                if(clien.getPasswordCliente().equals(contrasenia)){
+        for(Empleado clien:listaSeller){
+            if(clien.getUsername().equals(usuario)){
+                if(clien.getContrasenia().equals(contrasenia)){
                     ingreso=true;
                 }else{
                     ingreso=false;
@@ -89,22 +89,6 @@ public class Controladora {
             
         }
         return ingreso;
-    }
-
-    public int obtenerCliente(String usuario) {
-        int id_Clien=0;
-                
-        List<Cliente> listaClien=new ArrayList<Cliente>();
-        listaClien=controlPersis.traerCliente();
-        
-        for(Cliente clien:listaClien){
-            if(clien.getMail().equals(usuario)){
-                id_Clien=clien.getId_Persona();
-            }
-            
-        }
-        
-        return id_Clien;
     }
     
     public Empleado obtenerVendedor(int id){

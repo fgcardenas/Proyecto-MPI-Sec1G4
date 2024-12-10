@@ -26,6 +26,10 @@ public class ControllerPersistencia {
       this.AdminJPA.create(admin);
       System.out.println("Hola");
    }
+   public void crearVendedor(Empleado employee){
+       this.EmpJPA.create(employee);
+       System.out.println("Hola");
+   }
 
     public void crearArticulo(Articulo articulo) {
         this.ArtiJPA.create(articulo);
@@ -122,6 +126,7 @@ public class ControllerPersistencia {
             Logger.getLogger(ControllerPersistencia.class.getName()).log(Level.SEVERE, null,e);
         }
     }
+    
     
  
   
