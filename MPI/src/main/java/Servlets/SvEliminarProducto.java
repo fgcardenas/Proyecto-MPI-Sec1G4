@@ -24,7 +24,7 @@ public class SvEliminarProducto extends HttpServlet {
             throws ServletException, IOException {
         // Obtiene el ID del producto desde los parámetros
         int idProducto = Integer.parseInt(request.getParameter("id"));
-
+        
         try {
             // Llama al método de la lógica para eliminar el producto
             control.eliminarProducto(idProducto);

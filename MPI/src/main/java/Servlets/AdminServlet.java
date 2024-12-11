@@ -1,7 +1,6 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -45,9 +44,36 @@ public class AdminServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         String nombreAdmin = name+" "+lastName;
-
-        control.crearAdmin(nombreAdmin, password, phone, email, dni, address,userName);
         
-        request.getRequestDispatcher("admin.jsp").forward(request, response);
+        if(dni == null || name == null || lastName == null || phone == null || email == null || address == null || userName == null || password == null ||
+                dni.isEmpty() || name.isEmpty() || lastName.isEmpty() || phone.isEmpty() || email.isEmpty() || address.isEmpty() || userName.isEmpty() ||
+                dni.isBlank() || name.isBlank() || lastName.isBlank() || phone.isBlank() || email.isBlank() || address.isBlank() || userName.isBlank()){
+           request.setAttribute("error", "Todos los campos deben estar completos");
+           request.setAttribute("dni",dni);
+           request.setAttribute("name",name);
+           request.setAttribute("lastName",lastName);
+           request.setAttribute("phone",phone);
+           request.setAttribute("email",email);
+           request.setAttribute("address",address);
+           request.setAttribute("userName",userName);
+           request.setAttribute("password",password); 
+           request.getRequestDispatcher("admin.jsp").forward(request,response);
+        }
+        if(control.verificarDatosDuplicadosAdmin(dni, phone, email, userName)){
+           request.setAttribute("error", "Algunos valores ya están relacionados a otros administradores, por favor revise las credenciales y verifique nuevamente");
+           request.setAttribute("dni",dni);
+           request.setAttribute("name",name);
+           request.setAttribute("lastName",lastName);
+           request.setAttribute("phone",phone);
+           request.setAttribute("email",email);
+           request.setAttribute("address",address);
+           request.setAttribute("userName",userName);
+           request.setAttribute("password",password);
+           request.getRequestDispatcher("admin.jsp").forward(request,response); 
+        } else {
+            control.crearAdmin(nombreAdmin, password, phone, email, dni, address,userName);   
+            request.setAttribute("mensaje", "Administrador registrado exitosamente.");
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
+        }    
     }
 }

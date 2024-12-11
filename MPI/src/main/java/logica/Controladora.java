@@ -40,6 +40,27 @@ public class Controladora {
         Empleado seller = new Empleado(contrasenia,sueldo, name, telefono, mail, rut, direccion, username); 
         this.controlPersis.crearVendedor(seller);
     }
+    
+    public boolean verificarDatosDuplicadosVendedor(String rut, String telefono, String mail, String username){
+        List<Empleado> seller = controlPersis.traerEmpleados();
+        
+        for(Empleado emp: seller){
+            if (emp.getRut_Persona().equals(rut) || emp.getMail().equals(mail) || emp.getTelefono().equals(telefono) || emp.getUsername().equals(username)) return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean verificarDatosDuplicadosAdmin(String rut, String telefono, String mail, String username){
+        List<Administrador> admin = controlPersis.traerAdministrador();
+        
+        for(Administrador emp: admin){
+            if (emp.getRut_Persona().equals(rut) || emp.getMail().equals(mail) || emp.getTelefono().equals(telefono) || emp.getUsername().equals(username)) return true;
+        }
+        
+        return false;
+    }
+    
     public void crearCompra(String idCompra,String fecha, String lista_Articulos, String direccionEnvio, String vendedor, String nombreCliente, String telefonoCliente, int monto, String metodoPago){
         Compra compra = new Compra(idCompra,fecha, lista_Articulos,direccionEnvio, vendedor, nombreCliente, telefonoCliente, monto,metodoPago );
         this.controlPersis.crearCompra(compra);
@@ -86,8 +107,7 @@ public class Controladora {
     }
 
 
-    public boolean comprobarIngresoVendedor(String usuario, String contrasenia) {
-       boolean ingreso=false;
+    public Empleado comprobarIngresoVendedor(String usuario, String contrasenia) {
         
         List<Empleado> listaSeller=new ArrayList<Empleado>();
         listaSeller=controlPersis.traerEmpleados();
@@ -95,14 +115,12 @@ public class Controladora {
         for(Empleado clien:listaSeller){
             if(clien.getUsername().equals(usuario)){
                 if(clien.getContrasenia().equals(contrasenia)){
-                    ingreso=true;
-                }else{
-                    ingreso=false;
+                    return clien;
                 }
             }
             
         }
-        return ingreso;
+        return null;
     }
     
     public Empleado obtenerVendedor(int id){

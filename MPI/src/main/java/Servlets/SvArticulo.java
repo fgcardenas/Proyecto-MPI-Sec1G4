@@ -43,7 +43,10 @@ public class SvArticulo extends HttpServlet {
         String marcaArticulo = request.getParameter("marca_Articulo");
         String linkImagen = request.getParameter("link_Imagen");
         String fechaVencimientoStr = request.getParameter("fechaVencimiento");
-
+        
+        if ("imagen_Articulo".isEmpty() || fechaVencimientoStr.isEmpty() || fechaVencimientoStr.isBlank() ){
+            
+        }
         // Convertir fecha de vencimiento a LocalDate
         LocalDate fechaVencimiento = null;
         if (fechaVencimientoStr != null && !fechaVencimientoStr.isEmpty()) {

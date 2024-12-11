@@ -1,16 +1,16 @@
 package Servlets;
 
-import logica.Administrador;
 import java.io.IOException;
 
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.net.URLEncoder;
 import logica.Controladora;
+import logica.Empleado;
 
 @WebServlet("/SvLoginVendedor")
 public class SvLoginVendedor extends HttpServlet {
@@ -23,12 +23,14 @@ public class SvLoginVendedor extends HttpServlet {
         String password = request.getParameter("contrasenia");
 
         // Validación general
-        boolean validation = control.comprobarIngresoVendedor(user, password);
-        
-        if (validation) {
+        Empleado validation = control.comprobarIngresoVendedor(user, password);
+
+        if (validation!=null) {
+            String nombreVendedor = validation.getNombre_Persona();
             HttpSession mySession = request.getSession(true);
             mySession.setAttribute("userName", user);
-            response.sendRedirect("inicioVenta.html");  // Redirigir a home.jsp si es un administrador
+            String userName = (String) mySession.getAttribute("userName");
+response.sendRedirect("inicioVenta.html?username=" + URLEncoder.encode(userName, "UTF-8"));
         } else {
             response.sendRedirect("sesionventa.jsp");  // Redirigir con error si la validación falla
         }
@@ -38,5 +40,3 @@ public class SvLoginVendedor extends HttpServlet {
         return "Servlet de login que maneja distintos flujos dependiendo de la página que lo invoca";
     }
 }
-
-
