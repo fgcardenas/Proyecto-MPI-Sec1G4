@@ -45,6 +45,17 @@
     <script src="js/sweetalert2.min.js" ></script>
     <script src="js/jquery.mCustomScrollbar.concat.min.js" ></script>
     <script src="js/main.js" ></script>
+    <style>   
+        .pageContent {
+            background-color: #ffc683; /* Color de fondo anaranjado */
+        }
+    </style>
+    <script>
+            history.pushState(null, '', window.location.href);
+            window.onpopstate = function() {
+                history.pushState(null, '', window.location.href);
+            };
+    </script>
 </head>
 <body>
     <!-- navLateral -->
@@ -89,8 +100,15 @@
                                         </div>
                                         <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
                                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                                <input class="mdl-textfield__input" type="text" id="categoria_Articulo" name="categoria_Articulo" value="<%= producto.getCatergoria_Articulo() %>" required>
-                                                <label class="mdl-textfield__label" for="categoria_Articulo">Categoría</label>
+                                                    <select class="mdl-textfield__input" id="categoria_Articulo" name="categoria_Articulo" >
+                                                          <option value="" disabled selected></option>
+                                                          <option value="Harinas">Harinas</option>
+                                                          <option value="Quesos">Quesos</option>
+                                                          <option value="Aditivos Pastelería">Aditivos Pastelería</option>
+                                                          <option value="Mantecas y Grasas">Mantecas y Grasas</option>
+                                                          <option value="Levaduras">Levaduras</option>
+                                                     </select>
+                                                 <label class="mdl-textfield__label" for="categoria_Articulo">Categoría</label>
                                             </div>
                                         </div>
                                         <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">

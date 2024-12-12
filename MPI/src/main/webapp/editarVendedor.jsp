@@ -40,6 +40,17 @@
 	<script src="js/sweetalert2.min.js" ></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js" ></script>
 	<script src="js/main.js" ></script>
+        <script>
+            history.pushState(null, '', window.location.href);
+            window.onpopstate = function() {
+                history.pushState(null, '', window.location.href);
+            };
+        </script>
+        <style>   
+        .pageContent {
+            background-color: #ffc683; /* Color de fondo anaranjado */
+        }
+        </style>
 </head>
 <body>
     <!-- navLateral -->

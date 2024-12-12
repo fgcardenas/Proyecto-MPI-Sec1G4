@@ -29,6 +29,8 @@ public class SvVendedor extends HttpServlet {
         String nombreUsuario = request.getParameter("nombreUsuario_Vendedor");
 
         // Validar y convertir datos si es necesario
+        System.out.println("Valor de sueldo_Vendedor recibido: " + sueldoStr);
+
         int sueldo = 0;
         try {
             sueldo = Integer.parseInt(sueldoStr);
@@ -79,6 +81,7 @@ public class SvVendedor extends HttpServlet {
             request.getRequestDispatcher("seller.jsp").forward(request, response);
         } else {
             // Crear vendedor y mostrar mensaje de éxito
+            sueldo = Integer.parseInt(sueldoStr);
             String nombreCompleto = nombre + " " + apellido;
             control.crearVendedor(nombreCompleto, telefono, email, rut, sueldo, direccion, contrasenia, nombreUsuario);
             request.setAttribute("mensaje", "Vendedor registrado exitosamente.");

@@ -21,6 +21,7 @@ public class Empleado extends Persona {
       this.contrasenia = contrasenia;
       this.direccion = direccion;
       this.username = username;
+      this.sueldo_Empleado = sueldo_Empleado;
    }
 
    public String getContrasenia() {

@@ -151,7 +151,63 @@ public class Controladora {
         }
         return null;
     }
+    
+    public boolean comprobarFecha(String fechaMin, String fechaMax){
+       LocalDate min = constructorFecha(fechaMin);
+       LocalDate max = constructorFecha(fechaMax);
+       
+       return min.isBefore(max);
+    }
+    private LocalDate constructorFecha (String fechaString){ //se encarga de transformar fecha String en LocalDate
+        LocalDate fechaLocalD; //variable a retornar
+        
+        try{
+            fechaLocalD = LocalDate.parse(fechaString);
+            return fechaLocalD;
+        } catch (Exception e){
+           String[] fechaArray = fechaString.split("-"); //separacion de la fecha
 
+
+            fechaLocalD = LocalDate.of(Integer.parseInt(fechaArray[2]), //reestructura la fecha de formato dd/MM/yyyy a yyyy/MM/dd correspondiente a LocalDate
+                    Integer.parseInt(fechaArray[1]),
+                    Integer.parseInt(fechaArray[0]));
+
+            return fechaLocalD; 
+        }
+        
+    }
+    public String getSituacionStock(Articulo prod){
+        String situacion = "";
+        int stock = 0;
+        String categoria = prod.getCatergoria_Articulo();
+        
+        switch (categoria) {
+            case "Harinas":
+                stock = 100;
+                break;
+            case "Quesos":
+                stock = 120;
+                break;
+            case "Levaduras":
+                stock = 40;
+                break;
+            case "Aditivos Pasteleria":
+                stock = 60;
+                break;
+            case "Mantecas y Grasas":
+                stock = 70;
+                break;
+            case "Energeticas":
+                stock = 40;
+                break;
+        }
+        
+        if(prod.getStock() <= stock)situacion= "Bajo Stock";
+        if(prod.sinStock()) situacion = "Sin Stock";
+        if(prod.getStock() > stock && prod.getStock() < stock+40) situacion = "Stock limitado";
+        if(prod.getStock() > stock+40) situacion = "Stock Normal";
+        return situacion;
+    }
     
    
 

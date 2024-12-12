@@ -75,14 +75,15 @@ public class SvArticulo extends HttpServlet {
             // Ruta relativa para almacenar en la base de datos
             rutaImagenRelativa = "img/" + nombreArchivo;
         }
+        
 
         // Usar rutaImagenRelativa en lugar del linkImagen si se subió una imagen
         String rutaFinalImagen = (rutaImagenRelativa != null) ? rutaImagenRelativa : linkImagen;
 
         // Crear el artículo y persistir
         control.crearArticulo(nombreArticulo, categoriaArticulo, precioArticulo, stock, rutaFinalImagen, marcaArticulo, fechaVencimiento);
-
-        // Redirigir o devolver respuesta
-        response.sendRedirect("products.jsp"); // Página de éxito o mensaje
+        request.setAttribute("mensaje","Producto registrado exitosamente");
+        request.getRequestDispatcher("products.jsp").forward(request,response);
+        
     }
 }

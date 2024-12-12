@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page import="logica.Articulo" %>
 <%@ page import="java.util.List" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
@@ -19,11 +20,34 @@
     // Asegúrate de que `SvMostrarProductos` cargue los productos
     List<Articulo> productos = control.getArticulos();
     
-
-    if (productos == null) {
-        // Redirigir al servlet para cargar datos
-        response.sendRedirect("SvMostrarProductos");
-        return;
+    String filterCategoria = request.getParameter("filterCategoria");
+    String filterStock = request.getParameter("filterStock");
+    String filterPrecioMin = request.getParameter("filterPrecioMin");
+    String filterPrecioMax = request.getParameter("filterPrecioMax");
+    
+    List<Articulo> productosFiltrados = new ArrayList<>();
+    for(Articulo prod : productos){
+        boolean coincide = true;
+        
+        //Filtrar Categoria
+        if(filterCategoria != null && !filterCategoria.isEmpty()){
+            coincide = coincide && prod.getCatergoria_Articulo().equals(filterCategoria);
+        }
+        //Filtrar stock
+        if(filterStock != null && !filterStock.isEmpty()){
+            coincide = coincide && control.getSituacionStock(prod).equals(filterStock);
+        }
+        if(filterPrecioMin != null && !filterPrecioMin.isEmpty()){
+            int min = Integer.parseInt(filterPrecioMin);
+            coincide = coincide && prod.getPrecio_Articulo() >= min;
+        }
+        if(filterPrecioMax != null && !filterPrecioMax.isEmpty()){
+            int max = Integer.parseInt(filterPrecioMax);
+            coincide = coincide && prod.getPrecio_Articulo() <= max;
+        }
+        if(coincide){
+            productosFiltrados.add(prod);
+        }
     }
 %>
 
@@ -45,25 +69,85 @@
     <script src="js/sweetalert2.min.js"></script>
     <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/main.js"></script>
+    <style>   
+        .pageContent {
+            background-color: #ffc683; /* Color de fondo anaranjado */
+        }
+    </style>
 </head>
 <body>
     <!-- navLateral -->
     <%@ include file="component/lateralBar.jsp" %>
     <!-- pageContent -->
     <section class="full-width pageContent">
-        <!-- navBar -->
-        <%@ include file="component/navBarLogOut.jsp" %>
-        <section class="full-width header-well">
-            <div class="full-width header-well-icon">
-                <i class="zmdi zmdi-store"></i>
+            <!-- navBar -->
+            <%@ include file="component/navBarLogOut.jsp" %>
+            <section class="full-width header-well">
+        <div class="full-width header-well-icon">
+            <i class="zmdi zmdi-store"></i>
+        </div>
+        <div class="full-width header-well-text">
+            <p class="text-condensedLight">
+                Lista de productos actuales en exhibición de la página
+            </p>
+        </div>
+    </section>
+
+    <div class="full-width divider-menu-h"></div>
+
+    <!-- Formulario compacto -->
+    <div class="full-width header-well-text" style="margin-top: 5px; display: flex; justify-content: flex-start;">
+        <form action="inventory.jsp" method="GET" 
+            style="display: flex; gap: 8px; flex-wrap: nowrap; align-items: center; padding: 5px; border-radius: 4px;">
+
+            <!-- Filtro de Categoría -->
+            <div>
+                <label for="filterCategoria" style="font-size: 12px;">Categoría</label>
+                <select name="filterCategoria" id="filterCategoria" 
+                    style="width: 100px; font-size: 12px; padding: 2px;">
+                    <option value="">Todas</option>
+                    <option value="Harinas">Harinas</option>
+                    <option value="Quesos">Quesos</option>
+                    <option value="Levaduras">Levaduras</option>
+                    <option value="Aditivos Pastelería">Aditivos de Pastelería</option>
+                    <option value="Energéticas">Energéticas</option>
+                    <option value="Mantecas y Grasas">Mantecas y Grasas</option>
+                </select>
             </div>
-            <div class="full-width header-well-text">
-                <p class="text-condensedLight">
-                    Lista de productos actuales en exhibición de la página
-                </p>
+
+            <!-- Filtro de Stock -->
+            <div>
+                <label for="filterStock" style="font-size: 12px;">Stock</label>
+                <select name="filterStock" id="filterStock" 
+                    style="width: 100px; font-size: 12px; padding: 2px;">
+                    <option value="">Todos</option>
+                    <option value="Sin Stock">Sin Stock</option>
+                    <option value="Bajo Stock">Bajo stock</option>
+                    <option value="Stock Normal">Stock normal</option>
+                    <option value = "Stock limitado">Stock limitado</option>
+                </select>
             </div>
-        </section>
-        <div class="full-width divider-menu-h"></div>
+
+            <!-- Filtro de Precio -->
+            <div>
+                <label for="filterPrecioMin" style="font-size: 12px;">Precio Min</label>
+                    <input type="number" name="filterPrecioMin" id="filterPrecioMin" 
+                        placeholder="Min" style="width: 50px; font-size: 12px; padding: 2px;">
+            </div>
+            <div>
+                    <label for="filterPrecioMax" style="font-size: 12px;">Precio Max</label>
+                    <input type="number" name="filterPrecioMax" id="filterPrecioMax" 
+                        placeholder="Max" style="width: 50px; font-size: 12px; padding: 2px;">
+                </div>
+
+            <!-- Botón de Filtrar -->
+            <div style="text-align: center;">
+                <button type="submit" style="padding: 8px 16px; font-size: 12px; background-color: #ff9800; color: #fff; border: none; border-radius: 4px; cursor: pointer;">
+                    Filtrar
+                </button>
+            </div>
+        </form>
+    </div>
 
         <div class="mdl-grid">
             <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
@@ -74,6 +158,7 @@
                                 <th class="mdl-data-table__cell--non-numeric">Nombre</th>
                                 <th>Categoría</th>
                                 <th>Stock</th>
+                                <th>Estado Stock</th>
                                 <th>Precio</th>
                                 <th>Opciones</th>
                             </tr>
@@ -81,12 +166,18 @@
                         <tbody>
                             <%
                             if (productos != null && !productos.isEmpty()) {
-                                for (Articulo producto : productos) {
+                                for (Articulo producto : productosFiltrados) {
                             %>
                             <tr>
                                 <td class="mdl-data-table__cell--non-numeric"><%= producto.getNombre_Articulo() %></td>
                                 <td><%= producto.getCatergoria_Articulo() %></td>
                                 <td><%= producto.getStock() %></td>
+                                <td>
+                                    <% String stockStatus = control.getSituacionStock(producto); %>
+                                    <span class="<%= stockStatus.equals("Sin Stock") ? "stockless" : stockStatus.equals("Bajo Stock") ? "stock-low" : (stockStatus.equals("Stock limitado") ? "stock-limited" : "stock-high") %>">
+                                        <%= stockStatus %>
+                                    </span>
+                                </td>
                                 <td>$<%= producto.getPrecio_Articulo() %></td>
                                 <td>
                                     <div class="options-container">
@@ -123,9 +214,12 @@
         <form id="editForm" method="get" action="editarProducto.jsp">
             <input type="hidden" name="id" id="editProductId">
         </form>
-
-        
     <script>
+        history.pushState(null, '', window.location.href);
+        window.onpopstate = function() {
+            history.pushState(null, '', window.location.href);
+        };
+        
         function toggleOptionsMenu(event) {
             // Previene que el clic cierre el menú al abrirlo
             event.stopPropagation();
@@ -166,6 +260,20 @@
     </script>
     
     <style>
+        .stockless {
+            color: red;
+        }
+        .stock-low{
+            color: orange;
+        }
+
+        .stock-high {
+            color: green;
+        }
+        .stock-limited{
+            color: blue
+        }
+        
         .options-container {
             position: relative;
             display: inline-block;

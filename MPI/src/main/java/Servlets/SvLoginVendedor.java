@@ -30,7 +30,7 @@ public class SvLoginVendedor extends HttpServlet {
             HttpSession mySession = request.getSession(true);
             mySession.setAttribute("userName", user);
             String userName = (String) mySession.getAttribute("userName");
-response.sendRedirect("inicioVenta.html?username=" + URLEncoder.encode(userName, "UTF-8"));
+response.sendRedirect("inicioVenta.jsp?username=" + URLEncoder.encode(userName, "UTF-8"));
         } else {
             response.sendRedirect("sesionventa.jsp");  // Redirigir con error si la validación falla
         }

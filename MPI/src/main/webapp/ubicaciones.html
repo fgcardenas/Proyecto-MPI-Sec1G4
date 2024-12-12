@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Locales Atención Presencial</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700|Open+Sans:300,400">
+    <script>
+            history.pushState(null, '', window.location.href);
+            window.onpopstate = function() {
+                history.pushState(null, '', window.location.href);
+            };
+    </script>
     <style>
         body {
             font-family: 'Roboto', sans-serif;

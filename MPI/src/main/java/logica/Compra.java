@@ -14,9 +14,6 @@ import jakarta.persistence.Table;
 @Table(name="ventas")
 public class Compra {
    @Id
-   @GeneratedValue(
-      strategy = GenerationType.IDENTITY
-   )
    private String id_Compra;
    private String fechaBoleta;
    private String lista_Articulos;  // Cambiado a List<Integer>

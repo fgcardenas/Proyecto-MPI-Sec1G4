@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
@@ -17,6 +18,55 @@
     
     List<Compra> compras = new ArrayList<>();
     compras = control.getCompras(); // Obtiene la lista de compras
+
+    // Obtener valores de los filtros
+    String filtroVendedor = request.getParameter("vendedor");
+    String filtroPrecioMin = request.getParameter("precioMin");
+    String filtroPrecioMax = request.getParameter("precioMax");
+    String filtroFechaInicio = request.getParameter("fechaInicio");
+    String filtroFechaFin = request.getParameter("fechaFin");
+    String filtroPago = request.getParameter("methodPay");
+    
+    // Filtrar las compras según los parámetros
+    List<Compra> comprasFiltradas = new ArrayList<>();
+    for (Compra compra : compras) {
+        boolean coincide = true;
+
+        // Filtrar por vendedor
+        if (filtroVendedor != null && !filtroVendedor.isEmpty()) {
+            coincide = coincide && compra.getVendedor().toLowerCase().contains(filtroVendedor.toLowerCase());
+        }
+
+        // Filtrar por precio
+        if (filtroPrecioMin != null && !filtroPrecioMin.isEmpty()) {
+            double precioMin = Double.parseDouble(filtroPrecioMin);
+            coincide = coincide && compra.getMontoTotal() >= precioMin;
+        }
+        if (filtroPrecioMax != null && !filtroPrecioMax.isEmpty()) {
+            double precioMax = Double.parseDouble(filtroPrecioMax);
+            coincide = coincide && compra.getMontoTotal() <= precioMax;
+        }
+
+        // Filtrar por fecha
+        if (filtroFechaInicio != null && !filtroFechaInicio.isEmpty()) {
+            String[] fecja = compra.getFecha().split(",");
+            String fecjaStr = fecja[0];
+            coincide = coincide && control.comprobarFecha(filtroFechaInicio,fecjaStr);
+        }
+        if (filtroFechaFin != null && !filtroFechaFin.isEmpty()) {
+            String[] fecha = compra.getFecha().split(",");
+            String fechaStr = fecha[0];
+            coincide = coincide && control.comprobarFecha(fechaStr, filtroFechaFin);
+        }
+        if (filtroPago != null && !filtroPago.isEmpty()){
+            coincide = coincide && compra.getMetodoPago().equals(filtroPago);
+        }
+
+        if (coincide) {
+            comprasFiltradas.add(compra);
+        }
+    }
+    
 %>
 
 <!DOCTYPE html>
@@ -37,41 +87,34 @@
 	<script src="js/sweetalert2.min.js"></script>
 	<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script src="js/main.js"></script>
+        <script>
+            history.pushState(null, '', window.location.href);
+            window.onpopstate = function() {
+                history.pushState(null, '', window.location.href);
+            };
+        </script>
+        <style>   
+            .pageContent {
+                background-color: #ffc683; /* Color de fondo anaranjado */
+            }
 
-	<!-- Estilo y script para el Modal -->
-	<style>
-		.modal {
-			display: none;
-			position: fixed;
-			z-index: 1;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			background-color: rgba(0, 0, 0, 0.5);
-			overflow: auto;
-		}
-		.modal-content {
-			background-color: #fefefe;
-			margin: 15% auto;
-			padding: 20px;
-			border: 1px solid #888;
-			width: 80%;
-			max-width: 800px;
-		}
-		.close {
-			color: #aaa;
-			font-size: 28px;
-			font-weight: bold;
-			float: right;
-		}
-		.close:hover,
-		.close:focus {
-			color: black;
-			text-decoration: none;
-			cursor: pointer;
-		}
-	</style>
+            .details-container {
+                position: relative;
+            }
+            .details-preview {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .toggle-details-btn {
+                background: none;
+                border: none;
+                color: #3f51b5;
+                cursor: pointer;
+                text-decoration: underline;
+                padding: 0;
+            }
+        </style>
 </head>
 <body>
 	<!-- navLateral -->
@@ -79,92 +122,133 @@
 	<!-- pageContent -->
 	<section class="full-width pageContent">
 		<!-- navBar -->
-                <%@include file="component/navBarLogOut.jsp" %>
+        <%@include file="component/navBarLogOut.jsp" %>
 		<section class="full-width header-well">
 			<div class="full-width header-well-icon">
 				<i class="zmdi zmdi-shopping-cart"></i>
 			</div>
 			<div class="full-width header-well-text">
-				<p class="text-condensedLight">
-					Registro de ventas realizadas recientemente
-				</p>
-			</div>
+                            <form action="sales.jsp" method="GET" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; align-items: center; max-width: 100%; margin: auto;">
+                                <!-- Campo para Vendedor -->
+                                <div style="grid-column: span 1;">
+                                    <label for="vendedor" style="display: block; font-size: 10px;">Vendedor:</label>
+                                    <input type="text" id="vendedor" name="vendedor" placeholder="Nombre usuario Vendedor" style="width: 100%; height: 24px; font-size: 10px;">
+                                </div>
+                                <!-- Precio Mínimo -->
+                                <div>
+                                    <label for="precioMin" style="display: block; font-size: 10px;">Precio mínimo:</label>
+                                    <input type="number" id="precioMin" name="precioMin" placeholder="0" step="0.01" style="width: 100%; height: 24px; font-size: 10px;">
+                                </div>
+                                <!-- Precio Máximo -->
+                                <div>
+                                    <label for="precioMax" style="display: block; font-size: 10px;">Precio máximo:</label>
+                                    <input type="number" id="precioMax" name="precioMax" placeholder="10000" step="0.01" style="width: 100%; height: 24px; font-size: 10px;">
+                                </div>
+                                <!-- Fecha Inicio -->
+                                <div>
+                                    <label for="fechaInicio" style="display: block; font-size: 10px;">Fecha inicio:</label>
+                                    <input type="date" id="fechaInicio" name="fechaInicio" style="width: 100%; height: 24px; font-size: 10px;">
+                                </div>
+                                <!-- Fecha Fin -->
+                                <div>
+                                    <label for="fechaFin" style="display: block; font-size: 10px;">Fecha fin:</label>
+                                    <input type="date" id="fechaFin" name="fechaFin" style="width: 100%; height: 24px; font-size: 10px;">
+                                </div>
+                                <!-- Método de Pago -->
+                                <div style="grid-column: span 1;">
+                                    <label for="methodPay" style="display: block; font-size: 10px;">Método Pago:</label>
+                                    <select class="mdl-textfield__input" id="methodPay" name="methodPay">
+                                            <option value="" disabled selected>Selecciona una categoría</option>
+                                            <option value="Efectivo">Efectivo</option>
+                                            <option value="Tarjeta">Tarjeta</option>
+                                            <option value="Transferencia">Transferencia</option>
+                                    </select>                              
+                                </div>
+                                                                <!-- Botón Filtrar -->
+                                <div style="text-align: center;">
+                                    <button type="submit" style="padding: 8px 16px; font-size: 12px; background-color: #ff9800; color: #fff; border: none; border-radius: 4px; cursor: pointer;">
+                                        Filtrar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
 		</section>
 		<div class="full-width divider-menu-h"></div>
 		<div class="mdl-grid">
-			<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-				<div class="table-responsive">
-					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
-						<thead>
-							<tr>
-								<th class="mdl-data-table__cell--non-numeric">ID Compra</th>
-								<th>Fecha y Hora</th>
-								<th>Vendedor</th>
-								<th>Cliente</th>
-								<th>Teléfono</th>
-								<th>Dirección</th>
-								<th>Método de Pago</th>
-								<th>Total</th>
-								<th>Opciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<% for (Compra compra : compras) { %>
-								<tr>
-									<td class="mdl-data-table__cell--non-numeric"><%= compra.getId_Compra() %></td>
-									<td><%= compra.getFecha() %></td>
-									<td><%= compra.getVendedor() %></td>
-									<td><%= compra.getCliente() %></td>
-									<td><%= compra.getPhoneClient() %></td>
-									<td><%= compra.getDireccionEnvio() %></td>
-									<td><%= compra.getMetodoPago() %></td>
-									<td>$<%= compra.getMontoTotal() %></td>
-									<td>
-										<!-- Botón "Ver Detalles" -->
-										<button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" onclick="showModal('<%= compra.getId_Compra() %>', '<%= compra.getArticulos() %>')">
-											Ver detalles
-										</button>
-									</td>
-								</tr>
-							<% } %>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
+            <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
+                <div class="table-responsive">
+                   <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">ID Compra</th>
+                                <th>Fecha y Hora</th>
+                                <th>Vendedor</th>
+                                <th>Cliente</th>
+                                <th>Teléfono</th>
+                                <th>Dirección</th>
+                                <th>Detalles Compra</th>
+                                <th>Método de Pago</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (Compra compra : comprasFiltradas) { %>
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric" style="vertical-align: top;"><%= compra.getId_Compra() %></td>
+                                    <td style="vertical-align: top;"><%= compra.getFecha() %></td>
+                                    <td style="vertical-align: top;"><%= compra.getVendedor() %></td>
+                                    <td style="vertical-align: top;"><%= compra.getCliente() %></td>
+                                    <td style="vertical-align: top;"><%= compra.getPhoneClient() %></td>
+                                    <td style="vertical-align: top;"><%= compra.getDireccionEnvio() %></td>
+                                    <td style="vertical-align: top;">
+                                        <div class="details-container">
+                                            <div class="details-preview">
+                                                <%= compra.getArticulos().length() > 50 
+                                                    ? compra.getArticulos().substring(0, 50) + "..." 
+                                                    : compra.getArticulos() %>
+                                            </div>
+                                            <div class="details-full" style="display: none;">
+                                                <%= compra.getArticulos().replace("\n", "<br>") %>
+                                            </div>
+                                            <% if (compra.getArticulos().length() > 50) { %>
+                                                <button class="toggle-details-btn">Mostrar más</button>
+                                            <% } %>
+                                        </div>
+                                    </td>
+                                    <td style="vertical-align: top;"><%= compra.getMetodoPago() %></td>
+                                    <td style="vertical-align: top;">$<%= compra.getMontoTotal() %></td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 	</section>
+    <script>
+        // JavaScript para manejar la expansión y contracción de los detalles
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.toggle-details-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const container = this.parentElement;
+                    const preview = container.querySelector('.details-preview');
+                    const fullDetails = container.querySelector('.details-full');
 
-	<!-- Modal -->
-	<div id="myModal" class="modal">
-		<div class="modal-content">
-			<span class="close" onclick="closeModal()">&times;</span>
-			<h2>Detalles de la Compra</h2>
-			<div id="detalle-articulos"></div>
-		</div>
-	</div>
-
-	<!-- Script para mostrar el modal -->
-	<script>
-		// Función para mostrar el modal con los detalles de los artículos
-		function showModal(idCompra, articulos) {
-			// Muestra el contenido de los artículos en el modal
-			document.getElementById("detalle-articulos").innerHTML = "ID Compra: " + idCompra + "<br><br>" + articulos;
-			document.getElementById("myModal").style.display = "block"; // Muestra el modal
-		}
-
-		// Función para cerrar el modal
-		function closeModal() {
-			document.getElementById("myModal").style.display = "none"; // Cierra el modal
-		}
-
-		// Cuando el usuario haga clic fuera del modal, lo cierra
-		window.onclick = function(event) {
-			var modal = document.getElementById("myModal");
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-		}
-	</script>
+                    if (fullDetails.style.display === 'none') {
+                        fullDetails.style.display = 'block';
+                        preview.style.display = 'none';
+                        this.textContent = 'Mostrar menos';
+                    } else {
+                        fullDetails.style.display = 'none';
+                        preview.style.display = 'block';
+                        this.textContent = 'Mostrar más';
+                    }
+                });
+            });
+        });
+    </script>
+    
 </body>
 </html>
 
